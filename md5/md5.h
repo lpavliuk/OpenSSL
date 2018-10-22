@@ -46,16 +46,16 @@ static unsigned int g_table_md5[64] = {
 }
 
 
-typedef struct	s_argvs
+typedef struct		s_argvs
 {
 	char 			flag;
 	char 			*str;
 	struct s_argvs	*next;
-} 				t_argvs;
+} 					t_argvs;
 
-typedef struct	s_md5
+typedef struct		s_md5
 {
 	unsigned int input[16];
-}				t_md5;
+}					t_md5;
 
 #endif
