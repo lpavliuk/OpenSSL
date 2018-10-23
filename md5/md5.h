@@ -15,6 +15,14 @@
 
 # include "libft/include_lib/libft.h"
 
+# define CMD_MD5 0x01
+# define CMD_SHA256 0x02
+
+# define FLAG_P 0x01
+# define FLAG_S 0x02
+# define FLAG_R 0x04
+# define FLAG_Q 0x08
+
 # define A g_hash_md5[0]
 # define B g_hash_md5[0]
 # define C g_hash_md5[0]
@@ -43,7 +51,7 @@ static unsigned int g_table_md5[64] = {
 	0x655b59c3, 0x8f0ccc92, 0xffeff47d, 0x85845dd1,
 	0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1,
 	0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391 
-}
+};
 
 
 typedef struct		s_argvs
@@ -55,7 +63,10 @@ typedef struct		s_argvs
 
 typedef struct		s_md5
 {
-	unsigned int input[16];
+	unsigned int	input[16];
+	char			flags_r_q;
+	char			command;
+	t_argvs			*argvs;
 }					t_md5;
 
 #endif
