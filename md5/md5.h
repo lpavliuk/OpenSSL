@@ -61,7 +61,9 @@ typedef struct		s_argvs
 
 typedef struct		s_md5
 {
-	unsigned int	input[16];
+	// unsigned char	input_md5chr[64];
+	unsigned int	input_md5int[16];
+	unsigned long int 	size;
 	char			flags_r_q;
 	char			command;
 	t_argvs			*argvs;
