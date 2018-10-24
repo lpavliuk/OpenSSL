@@ -28,6 +28,16 @@ void	check_list(t_argvs *argvs)
 		tmp = tmp->next;
 	}
 }
+
+void	check_binary(unsigned char *tmp)
+{
+	int i = -1;
+	while (++i < 64)
+	{
+		ft_printf("%d - %x\n", i, tmp[i]);
+	}
+	ft_printf("\n");
+}
 // ============================================= //
 
 
@@ -62,20 +72,10 @@ void	take_string_md5(t_md5 *md5, int fd)
 		{
 			md5->size += i * 8;
 			input_md5chr[i] = 128;
-			input_md5chr[57] = 8;
-			tmp[3] = input_md5chr[0];
-			tmp[2] = input_md5chr[1];
-			tmp[57] = input_md5chr[57];
-			// memcpy(&md5->input_md5int[0], &input_md5chr[0], 64);
-			ft_printf("size -> %x\n", md5->size);
+			ft_memcpy(&input_md5chr[56], (char *)&md5->size, 8);
+			ft_memcpy(&md5->input_md5int[0], &input_md5chr[0], 64);
 
-			ft_printf("| %x |\n", input_md5chr[0]);
-			ft_printf("| %x |\n", input_md5chr[1]);
-			ft_printf("| %x |\n", md5->input_md5int[0]);
-			
-			// *(unsigned long int *)(&md5->input_md5int[14]) = md5->size;
-			
-			ft_printf("| %#x | %#x |\n", md5->input_md5int[14], md5->input_md5int[15]);
+			check_binary(tmp);
 			break ;
 		}
 	}
@@ -104,7 +104,10 @@ int		main(int argc, char **argv)
 	take_string_md5(md5, 0);
 	formula_md5(md5);
 	
-	ft_printf("%x%x%x%x\n", A, B, C, D);
+	unsigned char *tmp = (unsigned char *)&g_hash_md5[0];
+	int i = -1;
+	while (++i < 16)	
+		ft_printf("%02x", tmp[i]);
 
 	write(1, "\n\n", 2);
 	// system("leaks a.out");
