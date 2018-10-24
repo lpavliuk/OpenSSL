@@ -29,12 +29,10 @@
 # define D g_hash_md5[3]
 # define TMD5 g_table_md5
 
-static unsigned int g_hash_md5[4] = {
-	0x67452301, 0xEFCDAB89,
-	0x98BADCFE, 0x10325476
-};
 
-static unsigned int g_table_md5[64] = {
+unsigned int 				g_hash_md5[4];
+
+static const unsigned int 	g_table_md5[64] = {
 	0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee,
 	0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501,
 	0x698098d8, 0x8b44f7af, 0xffff5bb1, 0x895cd7be,

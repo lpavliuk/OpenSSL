@@ -126,10 +126,8 @@ void				formula_md5(t_md5 *md5)
 	formula_second(md5);
 	formula_third(md5);
 	formula_fourth(md5);
-	ft_printf("%x%x%x%x\n", A, B, C, D);
 	A = aa + A;
 	B = bb + B;
 	C = cc + C;
 	D = dd + D;
-	ft_printf("%x%x%x%x\n", A, B, C, D);
 }

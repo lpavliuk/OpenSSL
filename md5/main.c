@@ -12,6 +12,11 @@
 
 #include "md5.h"
 
+unsigned int g_hash_md5[4] = {
+	0x67452301, 0xEFCDAB89,
+	0x98BADCFE, 0x10325476
+};
+
 // =============| DELETE IT!!! |================ //
 void	check_list(t_argvs *argvs)
 {
@@ -62,6 +67,7 @@ int		main(int argc, char **argv)
 	ft_printf("before: %x\n", md5->input[0]);
 	read(0, &md5->input, 64);
 	ft_printf("after: %x\n", md5->input[0]);
+	ft_printf("%x%x%x%x\n", A, B, C, D);
 	formula_md5(md5);
 	ft_printf("%x%x%x%x\n", A, B, C, D);
 
