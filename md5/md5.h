@@ -24,9 +24,9 @@
 # define FLAG_Q 0x08
 
 # define A g_hash_md5[0]
-# define B g_hash_md5[0]
-# define C g_hash_md5[0]
-# define D g_hash_md5[0]
+# define B g_hash_md5[1]
+# define C g_hash_md5[2]
+# define D g_hash_md5[3]
 # define TMD5 g_table_md5
 
 static unsigned int g_hash_md5[4] = {
@@ -68,5 +68,10 @@ typedef struct		s_md5
 	char			command;
 	t_argvs			*argvs;
 }					t_md5;
+
+void				usage(char *str);
+void				formula_md5(t_md5 *md5);
+void				parsing_argv(t_md5 *md5, char **argv);
+void				check_command(t_md5 *md5, char *argv);
 
 #endif

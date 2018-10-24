@@ -1,0 +1,1 @@
+gcc -Wall -Wextra -Werror main.c parsing.c formula_md5.c libft/libft.a

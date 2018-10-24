@@ -12,100 +12,124 @@
 
 #include "md5.h"
 
-# define F(x, y, z) ((x & y) | (~x & z))
-# define G(x, y, z) ((x & z) | (~z & y))
-# define H(x, y, z) (x ^ y ^ z)
-# define I(x, y, z) (y ^ (~z | x))
+#define F(x, y, z) ((x & y) | (~x & z))
+#define G(x, y, z) ((x & z) | (~z & y))
+#define H(x, y, z) (x ^ y ^ z)
+#define I(x, y, z) (y ^ (~z | x))
 
-void	formula_first(t_md5 *md5)
+#define LOOP_SHIFT(x, k) ((x >> k) | (x << (32 - k)))
+
+static inline void	formula_first(t_md5 *md5)
 {
-	A = B + ((A + F(B,C,D) + X[0] + TMD5[1]) <<< 7);
-	D = A + ((D + F(A,B,C) + X[1] + TMD5[2]) <<< 12);
-	C = D + ((C + F(D,A,B) + X[2] + TMD5[3]) <<< 17);
-	B = C + ((B + F(C,D,A) + X[3] + TMD5[4]) <<< 22);
+	A = B + LOOP_SHIFT((A + F(B, C, D) + md5->input[0] + TMD5[0]), 7);
+	D = A + LOOP_SHIFT((D + F(A, B, C) + md5->input[1] + TMD5[1]), 12);
+	C = D + LOOP_SHIFT((C + F(D, A, B) + md5->input[2] + TMD5[2]), 17);
+	B = C + LOOP_SHIFT((B + F(C, D, A) + md5->input[3] + TMD5[3]), 22);
 
-	A = B + ((A + F(B,C,D) + X[4] + TMD5[5]) <<< 7);
-	D = A + ((D + F(A,B,C) + X[5] + TMD5[6]) <<< 12);
-	C = D + ((C + F(D,A,B) + X[6] + TMD5[7]) <<< 17);
-	B = C + ((B + F(C,D,A) + X[7] + TMD5[8]) <<< 22);
+	A = B + LOOP_SHIFT((A + F(B, C, D) + md5->input[4] + TMD5[4]), 7);
+	D = A + LOOP_SHIFT((D + F(A, B, C) + md5->input[5] + TMD5[5]), 12);
+	C = D + LOOP_SHIFT((C + F(D, A, B) + md5->input[6] + TMD5[6]), 17);
+	B = C + LOOP_SHIFT((B + F(C, D, A) + md5->input[7] + TMD5[7]), 22);
 
-	A = B + ((A + F(B,C,D) + X[8] + TMD5[9]) <<< 7);
-	D = A + ((D + F(A,B,C) + X[9] + TMD5[10]) <<< 12);
-	C = D + ((C + F(D,A,B) + X[10] + TMD5[11]) <<< 17);
-	B = C + ((B + F(C,D,A) + X[11] + TMD5[12]) <<< 22);
+	A = B + LOOP_SHIFT((A + F(B, C, D) + md5->input[8] + TMD5[8]), 7);
+	D = A + LOOP_SHIFT((D + F(A, B, C) + md5->input[9] + TMD5[9]), 12);
+	C = D + LOOP_SHIFT((C + F(D, A, B) + md5->input[10] + TMD5[10]), 17);
+	B = C + LOOP_SHIFT((B + F(C, D, A) + md5->input[11] + TMD5[11]), 22);
 
-	A = B + ((A + F(B,C,D) + X[12] + TMD5[13]) <<< 7);
-	D = A + ((D + F(A,B,C) + X[13] + TMD5[14]) <<< 12);
-	C = D + ((C + F(D,A,B) + X[14] + TMD5[15]) <<< 17);
-	B = C + ((B + F(C,D,A) + X[15] + TMD5[16]) <<< 22);
+	A = B + LOOP_SHIFT((A + F(B, C, D) + md5->input[12] + TMD5[12]), 7);
+	D = A + LOOP_SHIFT((D + F(A, B, C) + md5->input[13] + TMD5[13]), 12);
+	C = D + LOOP_SHIFT((C + F(D, A, B) + md5->input[14] + TMD5[14]), 17);
+	B = C + LOOP_SHIFT((B + F(C, D, A) + md5->input[15] + TMD5[15]), 22);
 }
 
-void	formula_second(t_md5 *md5)
+static inline void	formula_second(t_md5 *md5)
 {
-	A = B + ((A + G(B,C,D) + X[1] + TMD5[17]) <<< 5);
-	D = A + ((D + G(A,B,C) + X[6] + TMD5[18]) <<< 9);
-	C = D + ((C + G(D,A,B) + X[11] + TMD5[19]) <<< 14);
-	B = C + ((B + G(C,D,A) + X[0] + TMD5[20]) <<< 20);
+	A = B + LOOP_SHIFT((A + G(B, C, D) + md5->input[1] + TMD5[16]), 5);
+	D = A + LOOP_SHIFT((D + G(A, B, C) + md5->input[6] + TMD5[17]), 9);
+	C = D + LOOP_SHIFT((C + G(D, A, B) + md5->input[11] + TMD5[18]), 14);
+	B = C + LOOP_SHIFT((B + G(C, D, A) + md5->input[0] + TMD5[19]), 20);
 
-	A = B + ((A + G(B,C,D) + X[5] + TMD5[21]) <<< 5);
-	D = A + ((D + G(A,B,C) + X[10] + TMD5[22]) <<< 9);
-	C = D + ((C + G(D,A,B) + X[15] + TMD5[23]) <<< 14);
-	B = C + ((B + G(C,D,A) + X[4] + TMD5[24]) <<< 20);
+	A = B + LOOP_SHIFT((A + G(B, C, D) + md5->input[5] + TMD5[20]), 5);
+	D = A + LOOP_SHIFT((D + G(A, B, C) + md5->input[10] + TMD5[21]), 9);
+	C = D + LOOP_SHIFT((C + G(D, A, B) + md5->input[15] + TMD5[22]), 14);
+	B = C + LOOP_SHIFT((B + G(C, D, A) + md5->input[4] + TMD5[23]), 20);
 
-	A = B + ((A + G(B,C,D) + X[9] + TMD5[25]) <<< 5);
-	D = A + ((D + G(A,B,C) + X[14] + TMD5[26]) <<< 9);
-	C = D + ((C + G(D,A,B) + X[3] + TMD5[27]) <<< 14);
-	B = C + ((B + G(C,D,A) + X[8] + TMD5[28]) <<< 20);
+	A = B + LOOP_SHIFT((A + G(B, C, D) + md5->input[9] + TMD5[24]), 5);
+	D = A + LOOP_SHIFT((D + G(A, B, C) + md5->input[14] + TMD5[25]), 9);
+	C = D + LOOP_SHIFT((C + G(D, A, B) + md5->input[3] + TMD5[26]), 14);
+	B = C + LOOP_SHIFT((B + G(C, D, A) + md5->input[8] + TMD5[27]), 20);
 
-	A = B + ((A + G(B,C,D) + X[13] + TMD5[29]) <<< 5);
-	D = A + ((D + G(A,B,C) + X[2] + TMD5[30]) <<< 9);
-	C = D + ((C + G(D,A,B) + X[7] + TMD5[31]) <<< 14);
-	B = C + ((B + G(C,D,A) + X[12] + TMD5[32]) <<< 20);
+	A = B + LOOP_SHIFT((A + G(B, C, D) + md5->input[13] + TMD5[28]), 5);
+	D = A + LOOP_SHIFT((D + G(A, B, C) + md5->input[2] + TMD5[29]), 9);
+	C = D + LOOP_SHIFT((C + G(D, A, B) + md5->input[7] + TMD5[30]), 14);
+	B = C + LOOP_SHIFT((B + G(C, D, A) + md5->input[12] + TMD5[31]), 20);
 }
 
-void	formula_third(t_md5 *md5)
+static inline void	formula_third(t_md5 *md5)
 {
-	A = B + ((A + H(B,C,D) + X[5] + TMD5[33]) <<< 4);
-	D = A + ((D + H(A,B,C) + X[8] + TMD5[34]) <<< 11);
-	C = D + ((C + H(D,A,B) + X[11] + TMD5[35]) <<< 16);
-	B = C + ((B + H(C,D,A) + X[14] + TMD5[36]) <<< 23);
+	A = B + LOOP_SHIFT((A + H(B, C, D) + md5->input[5] + TMD5[32]), 4);
+	D = A + LOOP_SHIFT((D + H(A, B, C) + md5->input[8] + TMD5[33]), 11);
+	C = D + LOOP_SHIFT((C + H(D, A, B) + md5->input[11] + TMD5[34]), 16);
+	B = C + LOOP_SHIFT((B + H(C, D, A) + md5->input[14] + TMD5[35]), 23);
 
-	A = B + ((A + H(B,C,D) + X[1] + TMD5[37]) <<< 4);
-	D = A + ((D + H(A,B,C) + X[4] + TMD5[38]) <<< 11);
-	C = D + ((C + H(D,A,B) + X[7] + TMD5[39]) <<< 16);
-	B = C + ((B + H(C,D,A) + X[10] + TMD5[40]) <<< 23);
+	A = B + LOOP_SHIFT((A + H(B, C, D) + md5->input[1] + TMD5[36]), 4);
+	D = A + LOOP_SHIFT((D + H(A, B, C) + md5->input[4] + TMD5[37]), 11);
+	C = D + LOOP_SHIFT((C + H(D, A, B) + md5->input[7] + TMD5[38]), 16);
+	B = C + LOOP_SHIFT((B + H(C, D, A) + md5->input[10] + TMD5[39]), 23);
 
-	A = B + ((A + H(B,C,D) + X[13] + TMD5[41]) <<< 4);
-	D = A + ((D + H(A,B,C) + X[0] + TMD5[42]) <<< 11);
-	C = D + ((C + H(D,A,B) + X[3] + TMD5[43]) <<< 16);
-	B = C + ((B + H(C,D,A) + X[6] + TMD5[44]) <<< 23);
+	A = B + LOOP_SHIFT((A + H(B, C, D) + md5->input[13] + TMD5[40]), 4);
+	D = A + LOOP_SHIFT((D + H(A, B, C) + md5->input[0] + TMD5[41]), 11);
+	C = D + LOOP_SHIFT((C + H(D, A, B) + md5->input[3] + TMD5[42]), 16);
+	B = C + LOOP_SHIFT((B + H(C, D, A) + md5->input[6] + TMD5[43]), 23);
 
-	A = B + ((A + H(B,C,D) + X[9] + TMD5[45]) <<< 4);
-	D = A + ((D + H(A,B,C) + X[12] + TMD5[46]) <<< 11);
-	C = D + ((C + H(D,A,B) + X[15] + TMD5[47]) <<< 16);
-	B = C + ((B + H(C,D,A) + X[2] + TMD5[48]) <<< 23);
+	A = B + LOOP_SHIFT((A + H(B, C, D) + md5->input[9] + TMD5[44]), 4);
+	D = A + LOOP_SHIFT((D + H(A, B, C) + md5->input[12] + TMD5[45]), 11);
+	C = D + LOOP_SHIFT((C + H(D, A, B) + md5->input[15] + TMD5[46]), 16);
+	B = C + LOOP_SHIFT((B + H(C, D, A) + md5->input[2] + TMD5[47]), 23);
 }
 
-void	formula_fourth(t_md5 *md5)
+static inline void	formula_fourth(t_md5 *md5)
 {
-	A = B + ((A + I(B,C,D) + X[0] + TMD5[49]) <<< 6);
-	D = A + ((D + I(A,B,C) + X[7] + TMD5[50]) <<< 10);
-	C = D + ((C + I(D,A,B) + X[14] + TMD5[51]) <<< 15);
-	B = C + ((B + I(C,D,A) + X[5] + TMD5[52]) <<< 21);
+	A = B + LOOP_SHIFT((A + I(B, C, D) + md5->input[0] + TMD5[48]), 6);
+	D = A + LOOP_SHIFT((D + I(A, B, C) + md5->input[7] + TMD5[49]), 10);
+	C = D + LOOP_SHIFT((C + I(D, A, B) + md5->input[14] + TMD5[50]), 15);
+	B = C + LOOP_SHIFT((B + I(C, D, A) + md5->input[5] + TMD5[51]), 21);
 
-	A = B + ((A + I(B,C,D) + X[12] + TMD5[53]) <<< 6);
-	D = A + ((D + I(A,B,C) + X[3] + TMD5[54]) <<< 10);
-	C = D + ((C + I(D,A,B) + X[10] + TMD5[55]) <<< 15);
-	B = C + ((B + I(C,D,A) + X[1] + TMD5[56]) <<< 21);
+	A = B + LOOP_SHIFT((A + I(B, C, D) + md5->input[12] + TMD5[52]), 6);
+	D = A + LOOP_SHIFT((D + I(A, B, C) + md5->input[3] + TMD5[53]), 10);
+	C = D + LOOP_SHIFT((C + I(D, A, B) + md5->input[10] + TMD5[54]), 15);
+	B = C + LOOP_SHIFT((B + I(C, D, A) + md5->input[1] + TMD5[55]), 21);
 
-	A = B + ((A + I(B,C,D) + X[8] + TMD5[57]) <<< 6);
-	D = A + ((D + I(A,B,C) + X[15] + TMD5[58]) <<< 10);
-	C = D + ((C + I(D,A,B) + X[6] + TMD5[59]) <<< 15);
-	B = C + ((B + I(C,D,A) + X[13] + TMD5[60]) <<< 21);
+	A = B + LOOP_SHIFT((A + I(B, C, D) + md5->input[8] + TMD5[56]), 6);
+	D = A + LOOP_SHIFT((D + I(A, B, C) + md5->input[15] + TMD5[57]), 10);
+	C = D + LOOP_SHIFT((C + I(D, A, B) + md5->input[6] + TMD5[58]), 15);
+	B = C + LOOP_SHIFT((B + I(C, D, A) + md5->input[13] + TMD5[59]), 21);
 
-	A = B + ((A + I(B,C,D) + X[4] + TMD5[61]) <<< 6);
-	D = A + ((D + I(A,B,C) + X[11] + TMD5[62]) <<< 10);
-	C = D + ((C + I(D,A,B) + X[2] + TMD5[63]) <<< 15);
-	B = C + ((B + I(C,D,A) + X[9] + TMD5[64]) <<< 21);
+	A = B + LOOP_SHIFT((A + I(B, C, D) + md5->input[4] + TMD5[60]), 6);
+	D = A + LOOP_SHIFT((D + I(A, B, C) + md5->input[11] + TMD5[61]), 10);
+	C = D + LOOP_SHIFT((C + I(D, A, B) + md5->input[2] + TMD5[62]), 15);
+	B = C + LOOP_SHIFT((B + I(C, D, A) + md5->input[9] + TMD5[63]), 21);
 }
 
+void				formula_md5(t_md5 *md5)
+{
+	unsigned int aa;
+	unsigned int bb;
+	unsigned int cc;
+	unsigned int dd;
+
+	aa = A;
+	bb = B;
+	cc = C;
+	dd = D;
+	formula_first(md5);
+	formula_second(md5);
+	formula_third(md5);
+	formula_fourth(md5);
+	ft_printf("%x%x%x%x\n", A, B, C, D);
+	A = aa + A;
+	B = bb + B;
+	C = cc + C;
+	D = dd + D;
+	ft_printf("%x%x%x%x\n", A, B, C, D);
+}
