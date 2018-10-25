@@ -60,22 +60,21 @@ void	take_string_md5(t_md5 *md5, int fd)
 {
 	unsigned char	input_md5chr[64];
 	unsigned int	i;
-	unsigned char 	*tmp;
 
-	tmp = (unsigned char *)&md5->input_md5int[0];
 	i = 0;
 	ft_bzero(&input_md5chr[0], 64);
 	while ((i = read(fd, &input_md5chr[0], 64)))
 	{
 		ft_printf("\n%d ===> %s\n", i, input_md5chr);
+	//	if (i == -1)
+	//		ft_error();
 		if (i < 55)
 		{
 			md5->size += i * 8;
 			input_md5chr[i] = 128;
 			ft_memcpy(&input_md5chr[56], (char *)&md5->size, 8);
 			ft_memcpy(&md5->input_md5int[0], &input_md5chr[0], 64);
-
-			check_binary(tmp);
+			formula_md5(md5);
 			break ;
 		}
 	}
@@ -99,10 +98,7 @@ int		main(int argc, char **argv)
 	else
 		usage("commands");
 
-	ft_printf("%x%x%x%x\n", A, B, C, D);
-
 	take_string_md5(md5, 0);
-	formula_md5(md5);
 	
 	unsigned char *tmp = (unsigned char *)&g_hash_md5[0];
 	int i = -1;
