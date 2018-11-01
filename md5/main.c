@@ -38,6 +38,16 @@ void	check_binary(unsigned char *tmp)
 	}
 	ft_printf("\n");
 }
+
+void	write_output_md5(void)
+{
+	unsigned char *tmp = (unsigned char *)&g_hash_md5[0];
+	int i = -1;
+	while (++i < 16)	
+		ft_printf("%02x", tmp[i]);
+	ft_printf("\n");
+}
+
 // ============================================= //
 
 
@@ -63,8 +73,9 @@ void	take_string_md5(t_md5 *md5, int fd)
 
 	i = 0;
 	ft_bzero(&input_md5chr[0], 64);
-	while ((i = read(fd, &input_md5chr[0], 64)))
+	while (1)
 	{
+		i = read(fd, &input_md5chr[0], 64);
 		ft_printf("\n%d ===> %s\n", i, input_md5chr);
 	//	if (i == -1)
 	//		ft_error();
@@ -80,32 +91,85 @@ void	take_string_md5(t_md5 *md5, int fd)
 	}
 }
 
-int		main(int argc, char **argv)
+void	update_hashes(void)
+{
+	g_hash_md5[0] = 0x67452301;
+	g_hash_md5[1] = 0xEFCDAB89;
+	g_hash_md5[2] = 0x98BADCFE;
+	g_hash_md5[3] = 0x10325476;
+}
+
+void	free_md5(t_md5 *md5)
+{
+	t_argvs *tmp;
+
+	while (md5->argvs)
+	{
+		tmp = md5->argvs->next;
+		if (md5->argvs->str)
+			free(md5->argvs->str);
+		free(md5->argvs);
+		md5->argvs = tmp;
+	}
+	free(md5->line);
+	ft_bzero(md5, sizeof(t_md5));
+}
+
+void	use_formula(t_md5 *md5)
+{
+	if (md5->command == CMD_MD5)
+	{
+		take_string_md5(md5, 0);
+		write_output_md5(); // DELETE IT!!!
+	}
+	else if (md5->command == CMD_SHA256)
+		;
+}
+
+void	parsing_input(t_md5 *md5)
+{
+	char 	**str;
+	int		i;
+
+	ft_printf("==> %s\n", md5->line);
+	str = ft_strsplit(md5->line, ' ');
+	i = 0;
+	if (str && str[0])
+		check_command(md5, str[0]);
+	if (md5->command && str && str[1])
+		parsing_argv(md5, &str[1], &i);
+	
+	check_list(md5->argvs); // DELETE IT!!!
+	ft_printf("ok1\n");
+	
+	use_formula(md5);
+	while (i > -1)
+		free(str[i--]);
+	free(str);
+	free_md5(md5);
+}
+
+void	loop(t_md5 *md5)
+{
+	ft_printf("OpenSSL> ");
+	while (get_next_line(0, &md5->line))
+	{
+		parsing_input(md5);
+
+		update_hashes();
+		system("leaks a.out");
+		ft_printf("OpenSSL> ");
+	}
+}
+
+int		main(void)
 {
 	t_md5 *md5;
 	
 	md5 = malloc(sizeof(t_md5));
 	ft_bzero(md5, sizeof(t_md5));
-	if (argc > 1)
-	{
-		check_command(md5, argv[1]);
-		if (argc > 2)
-			parsing_argv(md5, argv);
-	//	else
-	//		work_input(md5);
-		check_list(md5->argvs);
-	}
-	else
-		usage("commands");
-
-	take_string_md5(md5, 0);
 	
-	unsigned char *tmp = (unsigned char *)&g_hash_md5[0];
-	int i = -1;
-	while (++i < 16)	
-		ft_printf("%02x", tmp[i]);
+	loop(md5);
 
-	write(1, "\n\n", 2);
-	// system("leaks a.out");
 	return (0);
 }

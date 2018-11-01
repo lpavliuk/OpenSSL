@@ -54,24 +54,24 @@ static const unsigned int 	g_table_md5[64] = {
 
 typedef struct		s_argvs
 {
-	char 			flag;
-	char 			*str;
-	struct s_argvs	*next;
+	char 				flag;
+	char 				*str;
+	struct s_argvs		*next;
 } 					t_argvs;
 
 typedef struct		s_md5
 {
-	// unsigned char	input_md5chr[64];
-	unsigned int	input_md5int[16];
+	unsigned int		input_md5int[16];
 	unsigned long int 	size;
-	char			flags_r_q;
-	char			command;
-	t_argvs			*argvs;
+	char				flags_r_q;
+	char				*line;
+	char				command;
+	t_argvs				*argvs;
 }					t_md5;
 
 void				usage(char *str);
 void				formula_md5(t_md5 *md5);
-void				parsing_argv(t_md5 *md5, char **argv);
+void				parsing_argv(t_md5 *md5, char **argv, int *i);
 void				check_command(t_md5 *md5, char *argv);
 
 #endif

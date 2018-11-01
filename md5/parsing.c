@@ -15,8 +15,6 @@
 void					usage(char *str)
 {
 	ft_printf("Usage: %s\n", str);
-	system("leaks a.out");
-	exit(0);
 }
 
 static inline t_argvs	*new_argvs(t_argvs **head)
@@ -40,36 +38,38 @@ static inline t_argvs	*new_argvs(t_argvs **head)
 	}
 }
 
-void	parsing_argv(t_md5 *md5, char **argv)
+void	parsing_argv(t_md5 *md5, char **argv, int *i)
 {
 	t_argvs *new;
-	int		i;
 	
-	i = 1;
-	while (argv[++i])
+	if (!argv || !argv[++(*i)])
+		return ;
+	ft_printf("parsing_argv()\n");
+	while (argv[++(*i)])
 	{
 		new = new_argvs(&md5->argvs);
-		if (!strcmp(argv[i], "-p"))		
+		if (!strcmp(argv[*i], "-p"))		
 			new->flag = FLAG_P;	
-		else if (!strcmp(argv[i], "-s"))
+		else if (!strcmp(argv[*i], "-s"))
 		{	
 			new->flag = FLAG_S;
-			if (argv[i + 1] && ++i)
-				new->str = ft_strdup(argv[i]);
-			else
-				usage("md5");
+			if (argv[*i + 1] && ++(*i))
+				new->str = ft_strdup(argv[*i]);
 		}	
-		else if (!strcmp(argv[i], "-r"))
+		else if (!strcmp(argv[*i], "-r"))
 			new->flag = FLAG_R;
-		else if (!strcmp(argv[i], "-q"))
+		else if (!strcmp(argv[*i], "-q"))
 			new->flag = FLAG_Q;
 		else
-			new->str = ft_strdup(argv[i]);
+			new->str = ft_strdup(argv[*i]);
 	}
 }
 
 void	check_command(t_md5 *md5, char *argv)
 {
+	ft_printf("checks_command()\n");
+	if (!argv)
+		return ;
 	if (!strcmp(argv, "md5"))
 		md5->command = CMD_MD5;
 	else if (!strcmp(argv, "sha256"))
