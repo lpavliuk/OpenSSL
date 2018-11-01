@@ -51,14 +51,6 @@ static const unsigned int 	g_table_md5[64] = {
 	0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391 
 };
 
-
-typedef struct		s_argvs
-{
-	char 				flag;
-	char 				*str;
-	struct s_argvs		*next;
-} 					t_argvs;
-
 typedef struct		s_md5
 {
 	unsigned int		input_md5int[16];
@@ -66,12 +58,15 @@ typedef struct		s_md5
 	char				flags_r_q;
 	char				*line;
 	char				command;
-	t_argvs				*argvs;
 }					t_md5;
 
+void				loop_ssl(t_md5 *md5);
 void				usage(char *str);
+void				use_formula(t_md5 *md5, int fd);
 void				formula_md5(t_md5 *md5);
 void				parsing_argv(t_md5 *md5, char **argv, int *i);
 void				check_command(t_md5 *md5, char *argv);
+void				update_hashes(void);
+void				free_md5(t_md5 *md5);
 
 #endif

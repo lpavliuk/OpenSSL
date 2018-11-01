@@ -12,11 +12,6 @@
 
 #include "md5.h"
 
-void					usage(char *str)
-{
-	ft_printf("Usage: %s\n", str);
-}
-
 static inline t_argvs	*new_argvs(t_argvs **head)
 {
 	t_argvs *tmp;
