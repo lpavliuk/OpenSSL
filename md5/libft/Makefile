@@ -100,7 +100,8 @@ SRC=./src_lib/ft_memset.c \
 	./src_lib/write_type_x_p.c \
 	./src_lib/write_type_o.c \
 	./src_lib/write_type_u.c \
-	./src_lib/write_colors.c
+	./src_lib/write_colors.c \
+	./src_lib/rev_bytes.c
 OBJ=$(SRC:.c=.o)
 NAME=libft.a
 INCLUDE=include_lib

@@ -117,6 +117,7 @@ size_t			ft_count_words(char *str, char c);
 size_t			ft_count(intmax_t n, short int base);
 size_t			ft_sqrt(size_t n);
 int				get_next_line(const int fd, char **line);
+unsigned int	rev_bytes(const unsigned int x, const char bytes);
 
 /*
 ** ****************************************************************************

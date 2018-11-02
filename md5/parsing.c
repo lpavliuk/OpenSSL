@@ -12,24 +12,47 @@
 
 #include "md5.h"
 
-static inline t_argvs	*new_argvs(t_argvs **head)
+void	flag_s(t_md5 *md5, char **argv, int *i)
 {
-	t_argvs *tmp;
+	int j;
 
-	if (!(*head))
+	j = -1;
+	while (argv[*i][++j] != 's')
+		;
+	if (!argv[*i][j])
 	{
-		(*head) = malloc(sizeof(t_argvs));
-		ft_bzero(*head, sizeof(t_argvs));
-		return (*head);	
+		if (argv[++(*i)])
+			md5->str = ft_strdup(argv[*i]);
+		else
+			usage("md5 -s");
 	}
 	else
+		md5->str = ft_strdup(&argv[*i][j]);
+	use_formula(md5, 0, 1);
+	free(md5->str);
+}
+
+void	check_flags(t_md5 *md5, char **argv, int *i)
+{
+	int j;
+
+	j = 0;
+	while (argv[(*i)][++j])
 	{
-		tmp = *head;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = malloc(sizeof(t_argvs));
-		ft_bzero(tmp->next, sizeof(t_argvs));
-		return (tmp->next);
+		if (argv[(*i)][j] == 'r' && !(md5->flag_rqp & FLAG_P))
+			md5->flag += FLAG_R;
+		else if (argv[(*i)][j] == 'q' && !(md5->flag_rqp & FLAG_P))
+			md5->flag += FLAG_Q;
+		else if (argv[(*i)][j] == 'p' && !(md5->flag_rqp & FLAG_P)
+			&& (md5->flag_rqp += FLAG_P))
+			use_formula(md5, 0, 0);
+		else if (argv[(*i)][j] == 'p')
+			use_formula(md5, 0, 1);
+		else if (argv[(*i)][j] == 's')
+			flag_s(md5, argv, i);
+		else if (argv[(*i)][j] != 's' && argv[(*i)][j] != 'p'
+			&& argv[(*i)][j] != 'r' && argv[(*i)][j] != 'q')
+			usage("md5 not valid flag!");
 	}
 }
 
@@ -42,21 +65,10 @@ void	parsing_argv(t_md5 *md5, char **argv, int *i)
 	ft_printf("parsing_argv()\n");
 	while (argv[++(*i)])
 	{
-		new = new_argvs(&md5->argvs);
-		if (!strcmp(argv[*i], "-p"))		
-			new->flag = FLAG_P;	
-		else if (!strcmp(argv[*i], "-s"))
-		{	
-			new->flag = FLAG_S;
-			if (argv[*i + 1] && ++(*i))
-				new->str = ft_strdup(argv[*i]);
-		}	
-		else if (!strcmp(argv[*i], "-r"))
-			new->flag = FLAG_R;
-		else if (!strcmp(argv[*i], "-q"))
-			new->flag = FLAG_Q;
-		else
-			new->str = ft_strdup(argv[*i]);
+		if (argv[*i][0] == '-')
+			check_flags(md5, argv, i)
+		// else
+		// 	check_file(md5, argv[*i])
 	}
 }
 

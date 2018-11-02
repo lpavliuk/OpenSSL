@@ -55,14 +55,15 @@ typedef struct		s_md5
 {
 	unsigned int		input_md5int[16];
 	unsigned long int 	size;
-	char				flags_r_q;
+	char 				*str;
+	char				flags_rqp;
 	char				*line;
 	char				command;
 }					t_md5;
 
 void				loop_ssl(t_md5 *md5);
 void				usage(char *str);
-void				use_formula(t_md5 *md5, int fd);
+void				use_formula(t_md5 *md5, int fd, char string);
 void				formula_md5(t_md5 *md5);
 void				parsing_argv(t_md5 *md5, char **argv, int *i);
 void				check_command(t_md5 *md5, char *argv);
