@@ -14,6 +14,7 @@
 # define MD5_H
 
 # include "libft/include_lib/libft.h"
+# include <fcntl.h>
 
 # define CMD_MD5 0x01
 # define CMD_SHA256 0x02

@@ -15,5 +15,4 @@
 void		usage(char *str)
 {
 	ft_printf("Usage: %s\n", str);
-	exit(0);
 }			

@@ -17,18 +17,7 @@ void	check_binary(unsigned char *tmp)
 {
 	int i = -1;
 	while (++i < 64)
-	{
 		ft_printf("%d - %x\n", i, tmp[i]);
-	}
-	ft_printf("\n");
-}
-
-void	write_output_md5(void)
-{
-	unsigned char *tmp = (unsigned char *)&g_hash_md5[0];
-	int i = -1;
-	while (++i < 16)	
-		ft_printf("%02x", tmp[i]);
 	ft_printf("\n");
 }
 
@@ -40,14 +29,18 @@ void	input_ssl(t_md5 *md5)
 	int		i;
 
 	ft_printf("==> %s\n", md5->line);
+	write(1, "\e[0m", 4);
 	str = ft_strsplit(md5->line, ' ');
+	i = 0;
 	if (str && str[0])
 		check_command(md5, str[0]);
 	if (md5->command && str && str[1])
-		parsing_argv(md5, &str[1], &i);
+		parsing_argv(md5, &str[0], &i);
+	else if (md5->command)
+		use_formula(md5, 0, 0);
 	else
-		use_formula(md5, 0);
-	
+		while (str[++i])
+			;
 	ft_printf("free!\n");
 
 	while (i > -1)
