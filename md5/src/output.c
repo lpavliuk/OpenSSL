@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   use_formula.c                                      :+:      :+:    :+:   */
+/*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opavliuk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/01 20:42:51 by opavliuk          #+#    #+#             */
-/*   Updated: 2018/11/01 20:42:52 by opavliuk         ###   ########.fr       */
+/*   Created: 2018/11/03 21:18:55 by opavliuk          #+#    #+#             */
+/*   Updated: 2018/11/03 21:18:56 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "md5.h"
 
-void	use_formula(t_md5 *md5, int fd, char string)
+void	output_hash_md5(void)
 {
-	md5->flag_data = 1;
-	if (md5->command == CMD_MD5)
+	char			tmp[33];
+	char			*hex;
+	int				i;
+	unsigned int	rev;
+
+	i = -1;
+	while (++i < 4)
 	{
-		(!string) ? take_fd_md5(md5, fd) : take_str_md5(md5);
-		output_hash_md5();
+		rev = rev_bytes(g_hash_md5[i], 4);
+		hex = ft_itoa_base(rev, 16);
+		ft_memcpy(&tmp[i * 8], hex, 8);
+		free(hex);
 	}
-	else if (md5->command == CMD_SHA256)
-		;
+	ft_printf("%s\n", tmp);
 }

@@ -88,6 +88,7 @@ typedef struct				s_md5
 void						argvs(t_md5 *md5, char **argv);
 void						loop_ssl(t_md5 *md5);
 void						usage(char *str);
+void						output_hash_md5(void);
 void						take_fd_md5(t_md5 *md5, int fd);
 void						take_str_md5(t_md5 *md5);
 void						use_formula(t_md5 *md5, int fd, char string);
