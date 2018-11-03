@@ -59,7 +59,7 @@ void				take_fd_md5(t_md5 *md5, int fd)
 		twice_last_line(md5, &input_md5chr[0]);
 }
 
-void				take_str_md5(t_md5 *md5)
-{
+// void				take_str_md5(t_md5 *md5)
+// {
 	
-}
+// }
