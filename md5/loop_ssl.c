@@ -43,10 +43,11 @@ void	input_ssl(t_md5 *md5)
 			;
 	ft_printf("free!\n");
 
-	while (i > -1)
-		free(str[i--]);
-	free(str);
-	free(md5->line);
+	if (str && str[0])
+		while (i > -1)
+			free(str[i--]);
+	(str) ? free(str) : 0;
+	(md5->line) ? free(md5->line) : 0;
 	ft_bzero(md5, sizeof(t_md5));
 }
 

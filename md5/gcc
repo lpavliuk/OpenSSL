@@ -1,1 +1,1 @@
-gcc -Wall -Wextra -Werror main.c loop_ssl.c updates.c parsing.c use_formula.c usages.c formula_md5.c libft/libft.a
+gcc -Wall -Wextra -Werror main.c check_flags.c loop_ssl.c updates.c parsing.c use_formula.c usages.c formula_md5.c libft/libft.a

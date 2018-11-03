@@ -14,5 +14,6 @@
 
 void		usage(char *str)
 {
-	ft_printf("Usage: %s\n", str);
-}			
+	ft_printf("{yellow}Usage: %s\n", str);
+	write(1, "\e[0m", 4);
+}

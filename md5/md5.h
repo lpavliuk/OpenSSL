@@ -30,10 +30,9 @@
 # define D g_hash_md5[3]
 # define TMD5 g_table_md5
 
+unsigned int				g_hash_md5[4];
 
-unsigned int 				g_hash_md5[4];
-
-static const unsigned int 	g_table_md5[64] = {
+static const unsigned int	g_table_md5[64] = {
 	0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee,
 	0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501,
 	0x698098d8, 0x8b44f7af, 0xffff5bb1, 0x895cd7be,
@@ -49,26 +48,29 @@ static const unsigned int 	g_table_md5[64] = {
 	0xf4292244, 0x432aff97, 0xab9423a7, 0xfc93a039,
 	0x655b59c3, 0x8f0ccc92, 0xffeff47d, 0x85845dd1,
 	0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1,
-	0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391 
+	0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391
 };
 
-typedef struct		s_md5
+typedef struct				s_md5
 {
 	unsigned int		input_md5int[16];
-	unsigned long int 	size;
-	char 				*str;
-	char				flags_rqp;
+	unsigned long int	size;
+	char				*str;
+	char				flags_rqps;
+	char				flag_data;
+	char				flag_usage;
 	char				*line;
 	char				command;
-}					t_md5;
+}							t_md5;
 
-void				loop_ssl(t_md5 *md5);
-void				usage(char *str);
-void				use_formula(t_md5 *md5, int fd, char string);
-void				formula_md5(t_md5 *md5);
-void				parsing_argv(t_md5 *md5, char **argv, int *i);
-void				check_command(t_md5 *md5, char *argv);
-void				update_hashes(void);
-void				free_md5(t_md5 *md5);
+void						loop_ssl(t_md5 *md5);
+void						usage(char *str);
+void						use_formula(t_md5 *md5, int fd, char string);
+void						formula_md5(t_md5 *md5);
+void						parsing_argv(t_md5 *md5, char **argv, int *i);
+void						check_command(t_md5 *md5, char *argv);
+void						check_flags(t_md5 *md5, char **argv, int *i);
+void						update_hashes(void);
+void						free_md5(t_md5 *md5);
 
 #endif
