@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "md5.h"
+#include "ssl.h"
 
 static inline void	flag_s(t_md5 *md5, char **argv, int *i)
 {

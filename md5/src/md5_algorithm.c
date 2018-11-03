@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "md5.h"
+#include "ssl.h"
 
 static inline void	twice_last_line(t_md5 *md5)
 {

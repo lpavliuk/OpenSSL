@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "md5.h"
+#include "ssl.h"
 
 void	dispatcher_cmd(t_md5 *md5, char string)
 {
