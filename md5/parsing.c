@@ -12,7 +12,7 @@
 
 #include "md5.h"
 
-void	check_file(t_md5 *md5, char *file)
+static inline void	check_file(t_md5 *md5, char *file)
 {
 	int		fd;
 	char	buf[1];
@@ -31,7 +31,7 @@ void	check_file(t_md5 *md5, char *file)
 	}
 }
 
-void	parsing_argv(t_md5 *md5, char **argv, int *i)
+void				parsing_argv(t_md5 *md5, char **argv, int *i)
 {
 	if (!argv || !argv[(*i)])
 		return ;
@@ -46,7 +46,7 @@ void	parsing_argv(t_md5 *md5, char **argv, int *i)
 	(!md5->flag_data && !md5->flag_usage) ? use_formula(md5, 0, 0) : 0;
 }
 
-void	check_command(t_md5 *md5, char *argv)
+void				check_command(t_md5 *md5, char *argv)
 {
 	ft_printf("checks_command()\n"); // DELETE!!
 	if (!argv)

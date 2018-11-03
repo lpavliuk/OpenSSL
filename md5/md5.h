@@ -65,6 +65,7 @@ typedef struct				s_md5
 
 void						loop_ssl(t_md5 *md5);
 void						usage(char *str);
+void						take_fd_md5(t_md5 *md5, int fd);
 void						use_formula(t_md5 *md5, int fd, char string);
 void						formula_md5(t_md5 *md5);
 void						parsing_argv(t_md5 *md5, char **argv, int *i);

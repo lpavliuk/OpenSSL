@@ -23,7 +23,7 @@ void	check_binary(unsigned char *tmp)
 
 // ============================================= //
 
-void	input_ssl(t_md5 *md5)
+static inline void	input_ssl(t_md5 *md5)
 {
 	char 	**str;
 	int		i;
@@ -51,7 +51,7 @@ void	input_ssl(t_md5 *md5)
 	ft_bzero(md5, sizeof(t_md5));
 }
 
-void	loop_ssl(t_md5 *md5)
+void				loop_ssl(t_md5 *md5)
 {
 	ft_printf("{yellow}OpenSSL>{green} ");
 	while (get_next_line(0, &md5->line))
