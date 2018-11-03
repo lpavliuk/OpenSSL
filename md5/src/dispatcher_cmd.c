@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   output.c                                           :+:      :+:    :+:   */
+/*   dispatcher_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opavliuk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/03 21:18:55 by opavliuk          #+#    #+#             */
-/*   Updated: 2018/11/03 21:18:56 by opavliuk         ###   ########.fr       */
+/*   Created: 2018/11/03 21:43:14 by opavliuk          #+#    #+#             */
+/*   Updated: 2018/11/03 21:43:17 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "md5.h"
 
-void	output_hash_md5(void)
+void	dispatcher_cmd(t_md5 *md5, char string)
 {
-	char			tmp[33];
-	char			*hex;
-	int				i;
-	unsigned int	rev;
+	int 	i;
 
 	i = -1;
-	while (++i < 4)
+	md5->flag_data = 1;
+	while (++i < NUM_CMDS)
 	{
-		rev = rev_bytes(g_hash_md5[i], 4);
-		hex = ft_itoa_base(rev, 16);
-		ft_memcpy(&tmp[i * 8], hex, 8);
-		free(hex);
+		if (md5->command == i)
+			(!string) ? g_func[i - 1](md5) : g_func[i](md5);
 	}
-	tmp[32] = '\0';
-	ft_printf("%s\n", tmp);
 }

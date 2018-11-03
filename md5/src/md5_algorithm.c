@@ -41,16 +41,17 @@ static inline void	end(t_md5 *md5, int i, int n)
 	ft_bzero(&md5->input_md5chr[0], 64);
 	ft_bzero(&md5->input_md5int[0], 64);
 	md5->size = 0;
+	output_hash_md5();
 }
 
-void				take_fd_md5(t_md5 *md5, int fd)
+void				take_fd_md5(t_md5 *md5)
 {
 	unsigned int	i;
 	unsigned int	n;
 
 	i = 0;
 	n = 0;
-	while ((i = read(fd, &md5->input_md5chr[n], 64 - n)) > 63 || i > 0)
+	while ((i = read(md5->fd, &md5->input_md5chr[n], 64 - n)) > 63 || i > 0)
 	{
 		md5->size += i * 8;
 		n += i;
@@ -72,7 +73,6 @@ void				take_str_md5(t_md5 *md5)
 
 	i = 1;
 	n = 0;
-	// ft_printf("+++ str +++ : %s\n", md5->str);
 	while (i > 0)
 	{
 		ft_strncpy((char *)&md5->input_md5chr[0], &md5->str[n], 64);

@@ -29,7 +29,7 @@ static inline void	flag_s(t_md5 *md5, char **argv, int *i)
 		md5->flag_usage = 1;
 	}
 	else
-		use_formula(md5, 0, 1);
+		dispatcher_cmd(md5, 1);
 	(md5->str) ? free(md5->str) : 0;
 }
 
@@ -38,12 +38,12 @@ static inline void	flag_p(t_md5 *md5)
 	if (md5->flags_rqps & FLAG_P)
 	{
 		md5->str = ft_strdup("");
-		use_formula(md5, 0, 1);
+		dispatcher_cmd(md5, 1);
 		free(md5->str);
 	}
 	else
 	{
-		use_formula(md5, 0, 0);
+		dispatcher_cmd(md5, 0);
 		md5->flags_rqps += FLAG_P;
 	}
 }

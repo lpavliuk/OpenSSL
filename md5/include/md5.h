@@ -16,8 +16,7 @@
 # include "../libft/include_lib/libft.h"
 # include <fcntl.h>
 
-# define CMD_MD5 0x01
-# define CMD_SHA256 0x02
+# define NUM_CMDS 2
 
 # define FLAG_P 0x01
 # define FLAG_S 0x02
@@ -29,6 +28,10 @@
 # define C g_hash_md5[2]
 # define D g_hash_md5[3]
 # define TMD5 g_table_md5
+
+static char				*g_cmd[NUM_CMDS] = {
+	"md5", "sha265"
+};
 
 unsigned int				g_hash_md5[4];
 
@@ -53,7 +56,7 @@ static const unsigned int	g_table_md5[64] = {
 
 unsigned int				g_hash_sha256[8];
 
-static const unsigned int 	g_table_sha256[64] = {
+static const unsigned int	g_table_sha256[64] = {
 	0x428A2F98, 0x71374491, 0xB5C0FBCF, 0xE9B5DBA5,
 	0x3956C25B, 0x59F111F1, 0x923F82A4, 0xAB1C5ED5,
 	0xD807AA98, 0x12835B01, 0x243185BE, 0x550C7DC3,
@@ -75,8 +78,9 @@ static const unsigned int 	g_table_sha256[64] = {
 typedef struct				s_md5
 {
 	unsigned int		input_md5int[16];
-	unsigned char 		input_md5chr[64];
+	unsigned char		input_md5chr[64];
 	unsigned long int	size;
+	int					fd;
 	char				*str;
 	char				flags_rqps;
 	char				flag_data;
@@ -89,14 +93,18 @@ void						argvs(t_md5 *md5, char **argv);
 void						loop_ssl(t_md5 *md5);
 void						usage(char *str);
 void						output_hash_md5(void);
-void						take_fd_md5(t_md5 *md5, int fd);
+void						take_fd_md5(t_md5 *md5);
 void						take_str_md5(t_md5 *md5);
-void						use_formula(t_md5 *md5, int fd, char string);
+void						dispatcher_cmd(t_md5 *md5, char string);
 void						formula_md5(t_md5 *md5);
 void						parsing_argv(t_md5 *md5, char **argv, int *i);
 void						check_command(t_md5 *md5, char *argv);
 void						check_flags(t_md5 *md5, char **argv, int *i);
 void						update_hashes(void);
 void						free_md5(t_md5 *md5);
+
+static void				(*g_func[NUM_CMDS])(t_md5 *md5) = {
+	take_fd_md5, take_str_md5
+};
 
 #endif

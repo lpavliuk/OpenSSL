@@ -14,20 +14,19 @@
 
 static inline void	check_file(t_md5 *md5, char *file)
 {
-	int		fd;
 	char	buf[1];
 
-	fd = open(file, O_RDONLY);
+	md5->fd = open(file, O_RDONLY);
 	md5->flag_data = 1;
-	if (fd < 0)
+	if (md5->fd < 0)
 		ft_printf("{red}Error: {yellow}Can't open file!{eoc}\n");
 	else
 	{
-		if (read(fd, &buf[0], 0) < 0)
+		if (read(md5->fd, &buf[0], 0) < 0)
 			ft_printf("{red}Error: {yellow}Can't read file!{eoc}\n");
 		else
-			use_formula(md5, fd, 0);
-		close(fd);
+			dispatcher_cmd(md5, 0);
+		close(md5->fd);
 	}
 }
 
@@ -44,18 +43,19 @@ void				parsing_argv(t_md5 *md5, char **argv, int *i)
 			check_file(md5, argv[*i]);
 		update_hashes();
 	}
-	(!md5->flag_data && !md5->flag_usage) ? use_formula(md5, 0, 0) : 0;
+	(!md5->flag_data && !md5->flag_usage) ? dispatcher_cmd(md5, 0) : 0;
 }
 
 void				check_command(t_md5 *md5, char *argv)
 {
+	int i;
 	// ft_printf("checks_command()\n"); // DELETE!!
 	if (!argv)
 		return ;
-	if (!strcmp(argv, "md5"))
-		md5->command = CMD_MD5;
-	else if (!strcmp(argv, "sha256"))
-		md5->command = CMD_SHA256;
-	else
+	i = -1;
+	while (++i < NUM_CMDS)
+		if (!strcmp(argv, g_cmd[i]))
+			md5->command = i + 1;
+	if (!md5->command)
 		usage("commands");
 }

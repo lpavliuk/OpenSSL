@@ -22,5 +22,5 @@ void	argvs(t_md5 *md5, char **argv)
 	if (md5->command && argv && argv[2])
 		parsing_argv(md5, argv, &i);
 	else if (md5->command)
-		use_formula(md5, 0, 0);
+		dispatcher_cmd(md5, 0);
 }

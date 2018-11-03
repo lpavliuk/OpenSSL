@@ -36,7 +36,7 @@ static inline void	input_ssl(t_md5 *md5)
 	if (md5->command && str && str[1])
 		parsing_argv(md5, &str[0], &i);
 	else if (md5->command)
-		use_formula(md5, 0, 0);
+		dispatcher_cmd(md5, 0);
 	else
 		while (str[++i])
 			;
@@ -55,7 +55,7 @@ void				loop_ssl(t_md5 *md5)
 	{
 		input_ssl(md5);
 		update_hashes();
-		
+
 		// system("leaks a.out");
 		ft_printf("{yellow}OpenSSL>{green} ");
 	}
