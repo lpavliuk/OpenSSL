@@ -26,14 +26,22 @@ unsigned int g_hash_md5[4] = {
 	0x98BADCFE, 0x10325476
 };
 
-int		main(void)
+unsigned int g_hash_sha256[8] = {
+	0x6A09E667, 0xBB67AE85,
+	0x3C6EF372, 0xA54FF53A,
+	0x510E527F, 0x9B05688C,
+	0x1F83D9AB, 0x5BE0CD19
+};
+
+int		main(int argc, char **argv)
 {
 	t_md5 *md5;
 	
 	md5 = malloc(sizeof(t_md5));
 	ft_bzero(md5, sizeof(t_md5));
-	
-	loop_ssl(md5);
-
+	if (argc == 1)
+		loop_ssl(md5);
+	else
+		argvs(md5, argv);
 	return (0);
 }

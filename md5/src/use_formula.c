@@ -30,7 +30,7 @@ void	use_formula(t_md5 *md5, int fd, char string)
 	md5->flag_data = 1;
 	if (md5->command == CMD_MD5)
 	{
-		(!string) ? take_fd_md5(md5, fd) : 0;
+		(!string) ? take_fd_md5(md5, fd) : take_str_md5(md5);
 		write_output_md5(); // DELETE IT!!!
 	}
 	else if (md5->command == CMD_SHA256)

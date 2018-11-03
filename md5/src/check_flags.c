@@ -36,7 +36,11 @@ static inline void	flag_s(t_md5 *md5, char **argv, int *i)
 static inline void	flag_p(t_md5 *md5)
 {
 	if (md5->flags_rqps & FLAG_P)
+	{
+		md5->str = ft_strdup("");
 		use_formula(md5, 0, 1);
+		free(md5->str);
+	}
 	else
 	{
 		use_formula(md5, 0, 0);
@@ -49,7 +53,7 @@ void				check_flags(t_md5 *md5, char **argv, int *i)
 	int		j;
 
 	j = 0;
-	ft_printf("check flags ==> %s\n", argv[(*i)]); // DELETE!!
+	// ft_printf("check flags ==> %s\n", argv[(*i)]); // DELETE!!
 	while (argv[(*i)][++j])
 	{
 		if (argv[(*i)][j] == 'r' && !(md5->flags_rqps & FLAG_P))

@@ -28,7 +28,6 @@ static inline void	input_ssl(t_md5 *md5)
 	char 	**str;
 	int		i;
 
-	ft_printf("==> %s\n", md5->line);
 	write(1, "\e[0m", 4);
 	str = ft_strsplit(md5->line, ' ');
 	i = 0;
@@ -41,8 +40,6 @@ static inline void	input_ssl(t_md5 *md5)
 	else
 		while (str[++i])
 			;
-	ft_printf("free!\n");
-
 	if (str && str[0])
 		while (i > -1)
 			free(str[i--]);
@@ -57,9 +54,9 @@ void				loop_ssl(t_md5 *md5)
 	while (get_next_line(0, &md5->line))
 	{
 		input_ssl(md5);
-
 		update_hashes();
-		system("leaks a.out");
+		
+		// system("leaks a.out");
 		ft_printf("{yellow}OpenSSL>{green} ");
 	}
 }
