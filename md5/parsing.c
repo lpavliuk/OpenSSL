@@ -20,17 +20,11 @@ void	flag_s(t_md5 *md5, char **argv, int *i)
 	while (argv[*i][++j] != 's')
 		;
 	if (!argv[*i][++j])
-	{
-		if (argv[++(*i)])
-			md5->str = ft_strdup(argv[*i]);
-	}
+		(argv[++(*i)]) ? md5->str = ft_strdup(argv[*i]): 0;
 	else
 		md5->str = ft_strdup(&argv[*i][j]);
-	if (!argv[*i])
-		usage("md5 -s");
-	else
-		use_formula(md5, 0, 1);
-	free(md5->str);
+	(!argv[*i]) ? usage("md5 -s"): use_formula(md5, 0, 1);
+	(md5->str) ? free(md5->str): 0;
 }
 
 void	check_flags(t_md5 *md5, char **argv, int *i)
