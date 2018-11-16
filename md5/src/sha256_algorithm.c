@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count.c                                         :+:      :+:    :+:   */
+/*   sha256_algorithm.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opavliuk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/03 09:24:19 by opavliuk          #+#    #+#             */
-/*   Updated: 2018/09/03 09:24:24 by opavliuk         ###   ########.fr       */
+/*   Created: 2018/11/16 21:00:42 by opavliuk          #+#    #+#             */
+/*   Updated: 2018/11/16 21:00:43 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ssl.h"
 
-size_t			ft_count(intmax_t n, short int base)
+void	take_str_sha256(t_md5 *md5)
 {
-	size_t c;
 
-	if (n >= 0)
-		c = 1;
-	else if (n < 0)
-		c = 2;
-	while (n != 0)
-	{
-		n = n / base;
-		c++;
-	}
-	if (base == 16 && c > 8)
-		c--;
-	return ((int)c);
+}
+
+void	take_fd_sha256(t_md5 *md5)
+{
+	
 }

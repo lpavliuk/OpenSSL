@@ -14,7 +14,7 @@
 
 char			*ft_itoa_base(uintmax_t n, short int base)
 {
-	size_t	c;
+	int 	c;
 	char	*str;
 	char	*bases;
 
@@ -25,7 +25,7 @@ char			*ft_itoa_base(uintmax_t n, short int base)
 		return (NULL);
 	ft_bzero(str, c);
 	str[c] = '\0';
-	while (n > 0)
+	while (c >= 0)
 	{
 		str[--c] = bases[n % base];
 		n /= base;
