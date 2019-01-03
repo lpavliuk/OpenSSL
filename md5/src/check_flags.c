@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opavliuk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/03 15:13:55 by opavliuk          #+#    #+#             */
-/*   Updated: 2018/11/03 15:13:56 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/03 19:37:50 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ void				check_flags(t_md5 *md5, char **argv, int *i)
 			md5->flag_usage = 1;
 			return ;
 		}
+		update_hashes();
 	}
 }

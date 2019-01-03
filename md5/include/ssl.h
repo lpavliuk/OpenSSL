@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ssl.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opavliuk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 17:00:42 by opavliuk          #+#    #+#             */
-/*   Updated: 2018/10/22 17:00:43 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/03 20:59:49 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define TMD5 g_table_md5
 
 static char				*g_cmd[NUM_CMDS] = {
-	"md5", "sha265"
+	"md5", "sha256"
 };
 
 unsigned int				g_hash_md5[4];
@@ -95,16 +95,19 @@ void						usage(char *str);
 void						output_hash_md5(void);
 void						take_fd_md5(t_md5 *md5);
 void						take_str_md5(t_md5 *md5);
+void						take_str_sha256(t_md5 *md5);
+void						take_fd_sha256(t_md5 *md5);
 void						dispatcher_cmd(t_md5 *md5, char string);
 void						formula_md5(t_md5 *md5);
+void						formula_sha256(t_md5 *md5);
 void						parsing_argv(t_md5 *md5, char **argv, int *i);
 void						check_command(t_md5 *md5, char *argv);
 void						check_flags(t_md5 *md5, char **argv, int *i);
 void						update_hashes(void);
 void						free_md5(t_md5 *md5);
 
-static void				(*g_func[NUM_CMDS])(t_md5 *md5) = {
-	take_fd_md5, take_str_md5
+static void				(*g_func[NUM_CMDS * 2])(t_md5 *md5) = {
+	take_fd_md5, take_str_md5, take_fd_sha256, take_str_sha256
 };
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_ssl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opavliuk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 20:40:02 by opavliuk          #+#    #+#             */
-/*   Updated: 2018/11/01 20:40:03 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/03 19:39:12 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void				loop_ssl(t_md5 *md5)
 		input_ssl(md5);
 		update_hashes();
 
-		// system("leaks a.out");
+		system("leaks a.out");
 		ft_printf("{yellow}OpenSSL>{green} ");
 	}
 }
