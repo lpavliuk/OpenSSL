@@ -6,7 +6,7 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 17:00:42 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/03 20:59:49 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/04 20:29:14 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void						argvs(t_md5 *md5, char **argv);
 void						loop_ssl(t_md5 *md5);
 void						usage(char *str);
 void						output_hash_md5(void);
+void						output_hash_sha256(void);
 void						take_fd_md5(t_md5 *md5);
 void						take_str_md5(t_md5 *md5);
 void						take_str_sha256(t_md5 *md5);

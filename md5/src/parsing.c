@@ -6,7 +6,7 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 09:14:22 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/03 21:05:15 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/04 20:09:03 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,17 @@ void				parsing_argv(t_md5 *md5, char **argv, int *i)
 void				check_command(t_md5 *md5, char *argv)
 {
 	int i;
+	int n;
 	// ft_printf("checks_command()\n"); // DELETE!!
 	if (!argv)
 		return ;
 	i = -1;
+	n = 1;
 	while (++i < NUM_CMDS)
 	{
 		if (!strcmp(argv, g_cmd[i]))
-			md5->command = i + 1;
+			md5->command = n;
+		n += 2;
 	}
 	if (!md5->command)
 		usage("commands");
