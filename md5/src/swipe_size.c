@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dispatcher_cmd.c                                   :+:      :+:    :+:   */
+/*   swipe_size.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/03 21:43:14 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/05 20:09:30 by opavliuk         ###   ########.fr       */
+/*   Created: 2019/01/05 20:18:14 by opavliuk          #+#    #+#             */
+/*   Updated: 2019/01/05 20:18:46 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ssl.h"
 
-void	dispatcher_cmd(t_md5 *md5, char string)
+void		swipe_size(unsigned long int *size)
 {
-	int		i;
+	unsigned long int	reversed;
+	unsigned char		*n1;
+	unsigned char		*n2;
 
-	i = -1;
-	md5->flag_data = 1;
-	while (++i < NUM_CMDS * 2)
-	{
-		if (md5->command == i)
-			(!string) ? g_func[i - 1](md5) : g_func[i](md5);
-	}
+	reversed = *size;
+	n1 = (unsigned char *)size;
+	n2 = (unsigned char *)&reversed;
+	n2[0] = n1[7];
+	n2[1] = n1[6];
+	n2[2] = n1[5];
+	n2[3] = n1[4];
+	n2[4] = n1[3];
+	n2[5] = n1[2];
+	n2[6] = n1[1];
+	n2[7] = n1[0];
+	*size = reversed;
 }

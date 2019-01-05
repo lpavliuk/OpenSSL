@@ -6,7 +6,7 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 17:00:42 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/04 20:29:14 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/05 20:18:42 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define D g_hash_md5[3]
 # define TMD5 g_table_md5
 
-static char				*g_cmd[NUM_CMDS] = {
+static char					*g_cmd[NUM_CMDS] = {
 	"md5", "sha256"
 };
 
@@ -104,6 +104,7 @@ void						formula_sha256(t_md5 *md5);
 void						parsing_argv(t_md5 *md5, char **argv, int *i);
 void						check_command(t_md5 *md5, char *argv);
 void						check_flags(t_md5 *md5, char **argv, int *i);
+void						swipe_size(unsigned long int *size);
 void						update_hashes(void);
 void						free_md5(t_md5 *md5);
 

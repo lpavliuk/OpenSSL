@@ -6,30 +6,11 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 21:00:42 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/04 21:37:50 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/05 20:18:55 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ssl.h"
-
-void	swipe_size(unsigned long int *size)
-{
-	unsigned long int	reversed;
-	unsigned char		*n1;
-	unsigned char		*n2;
-
-	reversed = *size;
-	n1 = (unsigned char *)&size;
-	n2 = (unsigned char *)&reversed;
-	n1[0] = n2[7];
-	n1[1] = n2[6];
-	n1[2] = n2[5];
-	n1[3] = n2[4];
-	n1[4] = n2[3];
-	n1[5] = n2[2];
-	n1[6] = n2[1];
-	n1[7] = n2[0];
-}
 
 static inline void	twice_last_line(t_md5 *md5)
 {
@@ -59,12 +40,10 @@ static inline void	end(t_md5 *md5, int i, int n)
 		last_line(md5);
 	else
 		twice_last_line(md5);
-	
-	i  = -1;
+	i = -1;
 	while (++i < 8)
 		g_hash_sha256[i] = rev_bytes(g_hash_sha256[i], 4);
 	output_hash_sha256();
-
 	ft_bzero(&md5->input_md5chr[0], 64);
 	ft_bzero(&md5->input_md5int[0], 64);
 	md5->size = 0;
@@ -111,6 +90,6 @@ void				take_str_sha256(t_md5 *md5)
 		formula_sha256(md5);
 		ft_bzero(&md5->input_md5chr[0], 64);
 		ft_bzero(&md5->input_md5int[0], 64);
-	}	
+	}
 	end(md5, i, n);
 }

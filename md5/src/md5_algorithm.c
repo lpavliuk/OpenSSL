@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   md5_algorithm.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opavliuk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/03 17:28:52 by opavliuk          #+#    #+#             */
-/*   Updated: 2018/11/03 17:28:54 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/05 20:19:29 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,6 @@ void				take_str_md5(t_md5 *md5)
 		formula_md5(md5);
 		ft_bzero(&md5->input_md5chr[0], 64);
 		ft_bzero(&md5->input_md5int[0], 64);
-	}	
+	}
 	end(md5, i, n);
 }

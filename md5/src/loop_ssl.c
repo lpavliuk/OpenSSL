@@ -6,26 +6,15 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 20:40:02 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/04 20:01:14 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/05 20:19:42 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ssl.h"
-// =============| DELETE IT!!! |================ //
-
-void	check_binary(unsigned char *tmp)
-{
-	int i = -1;
-	while (++i < 64)
-		ft_printf("%d - %x\n", i, tmp[i]);
-	ft_printf("\n");
-}
-
-// ============================================= //
 
 static inline void	input_ssl(t_md5 *md5)
 {
-	char 	**str;
+	char	**str;
 	int		i;
 
 	write(1, "\e[0m", 4);
@@ -55,7 +44,7 @@ void				loop_ssl(t_md5 *md5)
 	{
 		input_ssl(md5);
 		update_hashes();
-
+		
 		system("leaks a.out");
 		ft_printf("{yellow}OpenSSL>{green} ");
 	}

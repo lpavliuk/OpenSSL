@@ -6,7 +6,7 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 20:16:33 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/04 21:36:35 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/05 20:15:08 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 
 void	algorithm_sha256(unsigned int *sha256)
 {
-	int i;
-	unsigned int t1;
-	unsigned int t2;
+	int				i;
+	unsigned int	t1;
+	unsigned int	t2;
 
 	i = -1;
 	while (++i < 64)
@@ -48,8 +48,8 @@ void	algorithm_sha256(unsigned int *sha256)
 
 void	start_algo(unsigned int *sha256)
 {
-	unsigned int copy_sha256[8];
-	int i;
+	unsigned int	copy_sha256[8];
+	int				i;
 
 	i = -1;
 	while (++i < 8)
@@ -66,13 +66,13 @@ void	prepare_sha(t_md5 *md5, unsigned int *sha256)
 
 	i = -1;
 	while (++i < 16)
-        sha256[i] = rev_bytes(md5->input_md5int[i], 4);
-    while (i < 64)
-    {
-        sha256[i] = SSIG1(sha256[i - 2]) + sha256[i - 7] +
-    				SSIG0(sha256[i - 15]) + sha256[i - 16];
-    	++i;
-    }
+		sha256[i] = rev_bytes(md5->input_md5int[i], 4);
+	while (i < 64)
+	{
+		sha256[i] = SSIG1(sha256[i - 2]) + sha256[i - 7] +
+					SSIG0(sha256[i - 15]) + sha256[i - 16];
+		++i;
+	}
 }
 
 void	formula_sha256(t_md5 *md5)

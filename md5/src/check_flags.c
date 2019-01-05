@@ -6,7 +6,7 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/03 15:13:55 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/03 19:37:50 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/05 20:12:01 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void				check_flags(t_md5 *md5, char **argv, int *i)
 	int		j;
 
 	j = 0;
-	// ft_printf("check flags ==> %s\n", argv[(*i)]); // DELETE!!
 	while (argv[(*i)][++j])
 	{
 		if (argv[(*i)][j] == 'r' && !(md5->flags_rqps & FLAG_P))

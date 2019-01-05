@@ -6,7 +6,7 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 09:14:22 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/04 20:09:03 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/05 20:12:49 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void				parsing_argv(t_md5 *md5, char **argv, int *i)
 {
 	if (!argv || !argv[(*i)])
 		return ;
-	// ft_printf("parsing_argv()\n"); // DELETE!!
 	while (argv[*i] && argv[++(*i)])
 	{
 		if (argv[*i][0] == '-')
@@ -50,7 +49,7 @@ void				check_command(t_md5 *md5, char *argv)
 {
 	int i;
 	int n;
-	// ft_printf("checks_command()\n"); // DELETE!!
+
 	if (!argv)
 		return ;
 	i = -1;
