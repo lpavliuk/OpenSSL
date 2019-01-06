@@ -6,13 +6,21 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/03 21:18:55 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/04 21:10:50 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/06 19:40:13 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ssl.h"
 
-void	output_hash_md5(void)
+void	output(t_md5 *md5, char *hash)
+{
+	if (!md5->flags_rqps)
+		ft_printf("%s\n", hash);
+	else if (md5->flags_rqps & FLAG_P)
+		ft_printf("%s%s\n", md5->str, hash);
+}
+
+void	output_hash_md5(t_md5 *md5)
 {
 	char			tmp[33];
 	char			*hex;
@@ -28,10 +36,10 @@ void	output_hash_md5(void)
 		free(hex);
 	}
 	tmp[32] = '\0';
-	ft_printf("%s\n", tmp);
+	output(md5, &tmp[0]);
 }
 
-void	output_hash_sha256(void)
+void	output_hash_sha256(t_md5 *md5)
 {
 	char			tmp[65];
 	char			*hex;
@@ -47,5 +55,5 @@ void	output_hash_sha256(void)
 		free(hex);
 	}
 	tmp[64] = '\0';
-	ft_printf("%s\n", tmp);	
+	output(md5, &tmp[0]);
 }

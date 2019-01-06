@@ -6,7 +6,7 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 21:00:42 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/05 20:18:55 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/06 20:05:57 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static inline void	end(t_md5 *md5, int i, int n)
 	i = -1;
 	while (++i < 8)
 		g_hash_sha256[i] = rev_bytes(g_hash_sha256[i], 4);
-	output_hash_sha256();
+	output_hash_sha256(md5);
 	ft_bzero(&md5->input_md5chr[0], 64);
 	ft_bzero(&md5->input_md5int[0], 64);
 	md5->size = 0;
@@ -56,6 +56,11 @@ void				take_fd_sha256(t_md5 *md5)
 
 	i = 0;
 	n = 0;
+	if (md5->fd == 0)
+	{
+		read_stdin(md5);
+		return ;
+	}
 	while ((i = read(md5->fd, &md5->input_md5chr[n], 64 - n)) > 63 || i > 0)
 	{
 		md5->size += i * 8;
@@ -91,5 +96,5 @@ void				take_str_sha256(t_md5 *md5)
 		ft_bzero(&md5->input_md5chr[0], 64);
 		ft_bzero(&md5->input_md5int[0], 64);
 	}
-	end(md5, i, n);
+	end(md5, i, i);
 }

@@ -6,7 +6,7 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 17:00:42 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/05 20:18:42 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/06 20:06:38 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ typedef struct				s_md5
 void						argvs(t_md5 *md5, char **argv);
 void						loop_ssl(t_md5 *md5);
 void						usage(char *str);
-void						output_hash_md5(void);
-void						output_hash_sha256(void);
+void						output_hash_md5(t_md5 *md5);
+void						output_hash_sha256(t_md5 *md5);
 void						take_fd_md5(t_md5 *md5);
 void						take_str_md5(t_md5 *md5);
 void						take_str_sha256(t_md5 *md5);
@@ -106,7 +106,7 @@ void						check_command(t_md5 *md5, char *argv);
 void						check_flags(t_md5 *md5, char **argv, int *i);
 void						swipe_size(unsigned long int *size);
 void						update_hashes(void);
-void						free_md5(t_md5 *md5);
+void						read_stdin(t_md5 *md5);
 
 static void				(*g_func[NUM_CMDS * 2])(t_md5 *md5) = {
 	take_fd_md5, take_str_md5, take_fd_sha256, take_str_sha256

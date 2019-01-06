@@ -6,7 +6,7 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/03 17:28:52 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/05 20:19:29 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/06 20:01:30 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static inline void	end(t_md5 *md5, int i, int n)
 	ft_bzero(&md5->input_md5chr[0], 64);
 	ft_bzero(&md5->input_md5int[0], 64);
 	md5->size = 0;
-	output_hash_md5();
+	output_hash_md5(md5);
 }
 
 void				take_fd_md5(t_md5 *md5)
@@ -51,6 +51,11 @@ void				take_fd_md5(t_md5 *md5)
 
 	i = 0;
 	n = 0;
+	if (md5->fd == 0)
+	{
+		read_stdin(md5);
+		return ;
+	}
 	while ((i = read(md5->fd, &md5->input_md5chr[n], 64 - n)) > 63 || i > 0)
 	{
 		md5->size += i * 8;
@@ -86,5 +91,5 @@ void				take_str_md5(t_md5 *md5)
 		ft_bzero(&md5->input_md5chr[0], 64);
 		ft_bzero(&md5->input_md5int[0], 64);
 	}
-	end(md5, i, n);
+	end(md5, i, i);
 }
