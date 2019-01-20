@@ -29,4 +29,5 @@ void				read_stdin(t_md5 *md5)
 		free(tmp);
 	}
 	g_func[(int)md5->command](md5);
+	free(md5->str);
 }

@@ -84,6 +84,7 @@ typedef struct				s_md5
 	char				*str;
 	char				flags_rqps;
 	char				flag_data;
+	char				flag_file;
 	char				flag_usage;
 	char				*line;
 	char				command;

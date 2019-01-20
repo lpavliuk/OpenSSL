@@ -28,6 +28,7 @@ static inline void	check_file(t_md5 *md5, char *file)
 		{
 			md5->str = ft_strdup(file);
 			dispatcher_cmd(md5, 0);
+			md5->flag_file = 1;
 			free(md5->str);
 		}
 		close(md5->fd);
@@ -40,7 +41,7 @@ void				parsing_argv(t_md5 *md5, char **argv, int *i)
 		return ;
 	while (argv[*i] && argv[++(*i)])
 	{
-		if (argv[*i][0] == '-' && argv[*i][1])
+		if (argv[*i][0] == '-' && argv[*i][1] && !md5->flag_file)
 			check_flags(md5, argv, i);
 		else if (argv[*i][0] == '-' && !argv[*i][1])
 		{
