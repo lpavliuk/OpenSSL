@@ -6,11 +6,14 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 09:14:22 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/06 19:34:34 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/24 15:59:26 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ssl.h"
+
+#define ERR0 "No such file or directory"
+#define ERR1 "Can't read file or directory"
 
 static inline void	check_file(t_md5 *md5, char *file)
 {
@@ -18,17 +21,17 @@ static inline void	check_file(t_md5 *md5, char *file)
 
 	md5->fd = open(file, O_RDONLY);
 	md5->flag_data = 1;
+	md5->flag_file = 1;
 	if (md5->fd < 0)
-		ft_printf("{red}Error: {yellow}Can't open file!{eoc}\n");
+		ft_printf("{red}Error:{yellow} %s: %s{eoc}\n", file, ERR0);
 	else
 	{
 		if (read(md5->fd, &buf[0], 0) < 0)
-			ft_printf("{red}Error: {yellow}Can't read file!{eoc}\n");
+			ft_printf("{red}Error:{yellow} %s: %s{eoc}\n", file, ERR1);
 		else
 		{
 			md5->str = ft_strdup(file);
 			dispatcher_cmd(md5, 0);
-			md5->flag_file = 1;
 			free(md5->str);
 		}
 		close(md5->fd);

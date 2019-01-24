@@ -6,7 +6,7 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 17:00:34 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/05 20:11:26 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/24 16:00:00 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int				main(int argc, char **argv)
 		loop_ssl(md5);
 	else
 		argvs(md5, argv);
+	system("leaks a.out");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 20:05:41 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/06 20:05:59 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/24 15:59:17 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,4 @@ void				read_stdin(t_md5 *md5)
 		free(tmp);
 	}
 	g_func[(int)md5->command](md5);
-	free(md5->str);
 }
