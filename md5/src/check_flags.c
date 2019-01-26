@@ -6,7 +6,7 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/03 15:13:55 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/24 15:59:11 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/01/26 19:55:40 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static inline void	flag_s(t_md5 *md5, char **argv, int *i)
 	int j;
 
 	j = -1;
+	md5->flags_rqps += FLAG_S;
 	while (argv[*i][++j] != 's')
 		;
 	if (!argv[*i][++j])
