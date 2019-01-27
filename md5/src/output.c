@@ -31,16 +31,18 @@ static inline void	print_file(t_md5 *md5, char *hash)
 static inline void	output(t_md5 *md5, char *hash)
 {
 	write(1, "\e[97m", 5);
-	if (!md5->flags_rqps && !md5->flag_file)
+	if (md5->flags_rqps & FLAG_Q || (!md5->flags_rqps && !md5->flag_file))
 		ft_printf("%s\n", hash);
-	else if (md5->flag_file)
+	else if (md5->flag_file && !(md5->flags_rqps & FLAG_R))
 		print_file(md5, hash);
-	else if (md5->flags_rqps & FLAG_S)
+	else if (md5->flag_file)
+		ft_printf("%s %s\n", hash, md5->str);
+	else if (md5->flags_rqps & FLAG_S && !(md5->flags_rqps & FLAG_R))
 		print_s(md5, hash);
+	else if (md5->flags_rqps & FLAG_S)
+		ft_printf("%s \"%s\"\n", hash, md5->str);
 	else if (md5->flags_rqps & FLAG_P)
 		ft_printf("%s%s\n", md5->str, hash);
-	// else if (md5->flags_rqps & FLAG_S)
-	// 		ft_printf("%s")
 	write(1, "\e[0m", 4);
 }
 
