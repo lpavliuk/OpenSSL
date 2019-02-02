@@ -83,6 +83,7 @@ typedef struct				s_md5
 	int					fd;
 	char				*str;
 	char				flags_rqps;
+	char				flag_now;
 	char				flag_data;
 	char				flag_file;
 	char				flag_usage;

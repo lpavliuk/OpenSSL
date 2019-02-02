@@ -33,6 +33,7 @@ static inline void	check_file(t_md5 *md5, char *file)
 			md5->str = ft_strdup(file);
 			dispatcher_cmd(md5, 0);
 			free(md5->str);
+			md5->str = NULL;
 		}
 		close(md5->fd);
 	}

@@ -17,7 +17,9 @@ static inline void	flag_s(t_md5 *md5, char **argv, int *i)
 	int j;
 
 	j = -1;
-	md5->flags_rqps += FLAG_S;
+	if (!(md5->flags_rqps & FLAG_S))
+		md5->flags_rqps += FLAG_S;
+	md5->flag_now += FLAG_S;
 	while (argv[*i][++j] != 's')
 		;
 	if (!argv[*i][++j])
@@ -32,6 +34,8 @@ static inline void	flag_s(t_md5 *md5, char **argv, int *i)
 	else
 		dispatcher_cmd(md5, 1);
 	(md5->str) ? free(md5->str) : 0;
+	md5->str = NULL;
+	md5->flag_now -= FLAG_S;
 }
 
 static inline void	flag_p(t_md5 *md5, char **argv, int i)
@@ -41,18 +45,21 @@ static inline void	flag_p(t_md5 *md5, char **argv, int i)
 		dispatcher_cmd(md5, 1);
 	else
 	{
+		md5->flag_now += FLAG_P;
 		md5->flags_rqps += FLAG_P;
 		dispatcher_cmd(md5, 0);
-		if (!argv[i + 1] && (md5->flags_rqps & FLAG_Q
-				|| md5->flags_rqps & FLAG_R))
+		if (!argv[i + 1] && !(md5->flags_rqps & FLAG_S) &&
+			(md5->flags_rqps & FLAG_Q || md5->flags_rqps & FLAG_R))
 		{
 			free(md5->str);
 			update_hashes();
 			md5->str = ft_strdup("");
 			dispatcher_cmd(md5, 1);
 		}
+		md5->flag_now -= FLAG_P;
 	}
 	(md5->str) ? free(md5->str) : 0;
+	md5->str = NULL;
 }
 
 static inline void	flag_q_r(t_md5 *md5, char flag, char **argv, int i)
@@ -61,7 +68,7 @@ static inline void	flag_q_r(t_md5 *md5, char flag, char **argv, int i)
 		md5->flags_rqps += FLAG_R;
 	else
 		md5->flags_rqps += FLAG_Q;
-	if (md5->flags_rqps & FLAG_P && !argv[i + 1])
+	if (md5->flags_rqps & FLAG_P && !argv[i + 1] && !(md5->flags_rqps & FLAG_S))
 		flag_p(md5, argv, i);
 }
 
