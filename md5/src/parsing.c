@@ -77,7 +77,7 @@ void				check_command(t_md5 *md5, char *argv)
 		ft_printf("{blue}ft_ssl: ");
 		ft_printf("{red}Error:{yellow} '%s' {blue}is %s{eoc}\n", argv, INV);
 		ft_printf("\n{blue}Standard commands:\n\nMessage Digest commands:\n");
-		ft_printf("{yellow}md5\nsha256\n");
+		ft_printf("{yellow}md5\nsha256\nsha224\n");
 		write(1, "\e[94m", 5);
 		ft_printf("\nCipher commands:\n");
 		write(1, "\e[0m", 4);

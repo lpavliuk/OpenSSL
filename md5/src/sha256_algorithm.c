@@ -41,8 +41,12 @@ static inline void	end(t_md5 *md5, int i, int n)
 	else
 		twice_last_line(md5);
 	i = -1;
-	while (++i < 8)
-		g_hash_sha256[i] = rev_bytes(g_hash_sha256[i], 4);
+	if (md5->command == 3)
+		while (++i < 8)
+			g_hash_sha256[i] = rev_bytes(g_hash_sha256[i], 4);
+	else
+		while (++i < 8)
+			g_hash_sha224[i] = rev_bytes(g_hash_sha224[i], 4);
 	output_hash_sha256(md5);
 	ft_bzero(&md5->input_md5chr[0], 64);
 	ft_bzero(&md5->input_md5int[0], 64);

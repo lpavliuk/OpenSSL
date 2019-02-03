@@ -15,8 +15,6 @@
 /*
 ** -p : Читает из INPUT и выводит то что считал и хэш
 ** -s : Читает следущий аргумент для хэширования
-** "MD5 ("text") = hash\n"
-** "SHA256 ("text") = hash\n"
 ** -r : Вначале хэш, потом имя файла или текст
 ** -q : Выводит только хэш и имеет приоритет перед
 */
@@ -24,6 +22,13 @@
 unsigned int	g_hash_md5[4] = {
 	0x67452301, 0xEFCDAB89,
 	0x98BADCFE, 0x10325476
+};
+
+unsigned int	g_hash_sha224[8] = {
+	0xc1059ed8, 0x367cd507,
+	0x3070dd17, 0xf70e5939,
+	0xffc00b31, 0x68581511,
+	0x64f98fa7, 0xbefa4fa4
 };
 
 unsigned int	g_hash_sha256[8] = {
@@ -43,6 +48,5 @@ int				main(int argc, char **argv)
 		loop_ssl(md5);
 	else
 		argvs(md5, argv);
-	system("leaks a.out");
 	return (0);
 }

@@ -41,12 +41,10 @@ static inline void	input_ssl(t_md5 *md5)
 void				loop_ssl(t_md5 *md5)
 {
 	ft_printf("{yellow}OpenSSL>{green} ");
-	while (get_next_line(0, &md5->line))
+	while (get_next_line(0, &md5->line) > 0)
 	{
 		input_ssl(md5);
 		update_hashes();
-		
-		system("leaks a.out");
 		ft_printf("{yellow}OpenSSL>{green} ");
 	}
 }
