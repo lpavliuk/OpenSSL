@@ -34,7 +34,7 @@ static inline void	end(t_md5 *md5, int i, int n)
 {
 	md5->size += i * 8;
 	md5->input_md5chr[n] = 128;
-	if (i < 56)
+	if (n < 56)
 		last_line(md5);
 	else
 		twice_last_line(md5);

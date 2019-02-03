@@ -27,10 +27,7 @@ static inline void	flag_s(t_md5 *md5, char **argv, int *i)
 	else
 		md5->str = ft_strdup(&argv[*i][j]);
 	if (!argv[*i])
-	{
-		usage("md5 -s");
-		md5->flag_usage = 1;
-	}
+		error_option(md5, argv[*i - 1]);
 	else
 		dispatcher_cmd(md5, 1);
 	(md5->str) ? free(md5->str) : 0;
@@ -92,8 +89,7 @@ void				check_flags(t_md5 *md5, char **argv, int *i)
 		else if (argv[(*i)][j] != 's' && argv[(*i)][j] != 'p'
 			&& argv[(*i)][j] != 'r' && argv[(*i)][j] != 'q')
 		{
-			usage("unknown option");
-			md5->flag_usage = 1;
+			error_option(md5, argv[*i]);
 			return ;
 		}
 		update_hashes();

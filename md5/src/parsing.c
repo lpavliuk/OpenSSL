@@ -12,6 +12,7 @@
 
 #include "ssl.h"
 
+#define INV "is an invalid command."
 #define ERR0 "No such file or directory"
 #define ERR1 "Can't read file or directory"
 
@@ -48,10 +49,7 @@ void				parsing_argv(t_md5 *md5, char **argv, int *i)
 		if (argv[*i][0] == '-' && argv[*i][1] && !md5->flag_file)
 			check_flags(md5, argv, i);
 		else if (argv[*i][0] == '-' && !argv[*i][1])
-		{
-			usage("unknown option");
-			md5->flag_usage = 1;
-		}
+			error_option(md5, argv[*i]);
 		else
 			check_file(md5, argv[*i]);
 		update_hashes();
@@ -75,5 +73,13 @@ void				check_command(t_md5 *md5, char *argv)
 		n += 2;
 	}
 	if (!md5->command)
-		usage("commands");
+	{
+		ft_printf("{blue}ft_ssl: ");
+		ft_printf("{red}Error:{yellow} '%s' {blue}is %s{eoc}\n", argv, INV);
+		ft_printf("\n{blue}Standard commands:\n\nMessage Digest commands:\n");
+		ft_printf("{yellow}md5\nsha256\n");
+		write(1, "\e[94m", 5);
+		ft_printf("\nCipher commands:\n");
+		write(1, "\e[0m", 4);
+	}
 }

@@ -93,7 +93,7 @@ typedef struct				s_md5
 
 void						argvs(t_md5 *md5, char **argv);
 void						loop_ssl(t_md5 *md5);
-void						usage(char *str);
+void						error_option(t_md5 *md5, char *argv);
 void						output_hash_md5(t_md5 *md5);
 void						output_hash_sha256(t_md5 *md5);
 void						take_fd_md5(t_md5 *md5);
