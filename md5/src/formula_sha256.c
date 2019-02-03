@@ -21,7 +21,22 @@
 #define SSIG0(x) (ROTR(x, 7) ^ ROTR(x, 18) ^ (x >> 3))
 #define SSIG1(x) (ROTR(x, 17) ^ ROTR(x, 19) ^ (x >> 10))
 
-void	algorithm_sha256(unsigned int *sha256)
+static inline void	prepare_sha(t_md5 *md5, unsigned int *sha256)
+{
+	int i;
+
+	i = -1;
+	while (++i < 16)
+		sha256[i] = rev_bytes(md5->input_md5int[i], 4);
+	while (i < 64)
+	{
+		sha256[i] = SSIG1(sha256[i - 2]) + sha256[i - 7] +
+					SSIG0(sha256[i - 15]) + sha256[i - 16];
+		++i;
+	}
+}
+
+static inline void	algorithm_sha256(unsigned int *sha256)
 {
 	int				i;
 	unsigned int	t1;
@@ -46,7 +61,7 @@ void	algorithm_sha256(unsigned int *sha256)
 	}
 }
 
-void	start_algo(unsigned int *sha256)
+static inline void	start_algo(unsigned int *sha256)
 {
 	unsigned int	copy_sha256[8];
 	int				i;
@@ -60,22 +75,7 @@ void	start_algo(unsigned int *sha256)
 		g_hash_sha256[i] = copy_sha256[i] + g_hash_sha256[i];
 }
 
-void	prepare_sha(t_md5 *md5, unsigned int *sha256)
-{
-	int i;
-
-	i = -1;
-	while (++i < 16)
-		sha256[i] = rev_bytes(md5->input_md5int[i], 4);
-	while (i < 64)
-	{
-		sha256[i] = SSIG1(sha256[i - 2]) + sha256[i - 7] +
-					SSIG0(sha256[i - 15]) + sha256[i - 16];
-		++i;
-	}
-}
-
-void	formula_sha256(t_md5 *md5)
+void				formula_sha256(t_md5 *md5)
 {
 	unsigned int sha256[64];
 

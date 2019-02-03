@@ -33,6 +33,7 @@ static inline void	input_ssl(t_md5 *md5)
 		while (i > -1)
 			free(str[i--]);
 	(str) ? free(str) : 0;
+	(md5->str) ? free(md5->str) : 0;
 	(md5->line) ? free(md5->line) : 0;
 	ft_bzero(md5, sizeof(t_md5));
 }
