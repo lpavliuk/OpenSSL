@@ -13,10 +13,10 @@
 #include "ssl.h"
 
 /*
-** -p : Читает из INPUT и выводит то что считал и хэш
-** -s : Читает следущий аргумент для хэширования
-** -r : Вначале хэш, потом имя файла или текст
-** -q : Выводит только хэш и имеет приоритет перед
+** -p : echo STDIN to STDOUT and append the checksum to STDOUT
+** -s : print the sum of the given string
+** -r : reverse the format of the output
+** -q : quiet mode
 */
 
 unsigned int	g_hash_md5[4] = {
