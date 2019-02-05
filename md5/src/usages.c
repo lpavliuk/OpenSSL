@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   usages.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opavliuk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 20:30:42 by opavliuk          #+#    #+#             */
-/*   Updated: 2018/11/01 20:30:44 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/02/05 19:01:50 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ssl.h"
 
-#define	OPT "ft_ssl: illegal option --"
+#define OPT "ft_ssl: illegal option --"
 
 void		error_option(t_md5 *md5, char *argv)
 {

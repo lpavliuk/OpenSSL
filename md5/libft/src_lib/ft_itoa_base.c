@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opavliuk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 09:21:19 by opavliuk          #+#    #+#             */
-/*   Updated: 2018/09/03 09:21:21 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/02/05 19:33:22 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char			*ft_itoa_base(uintmax_t n, short int base)
 {
-	int 	c;
+	int		c;
 	char	*str;
 	char	*bases;
 

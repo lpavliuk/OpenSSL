@@ -6,7 +6,7 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/03 15:13:55 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/26 19:55:40 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/02/05 19:38:30 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,14 @@ static inline void	flag_p(t_md5 *md5, char **argv, int i)
 	md5->str = NULL;
 }
 
-static inline void	flag_q_r(t_md5 *md5, char flag, char **argv, int i)
+static inline void	flag_q_r(t_md5 *md5, char *flag, char **argv, int i)
 {
-	if (flag == 'r')
+	if (*flag == 'r')
 		md5->flags_rqps += FLAG_R;
 	else
 		md5->flags_rqps += FLAG_Q;
-	if (md5->flags_rqps & FLAG_P && !argv[i + 1] && !(md5->flags_rqps & FLAG_S))
+	if (md5->flags_rqps & FLAG_P &&
+		!argv[i + 1] && !flag[1] && !(md5->flags_rqps & FLAG_S))
 		flag_p(md5, argv, i);
 }
 
@@ -78,7 +79,7 @@ void				check_flags(t_md5 *md5, char **argv, int *i)
 	{
 		if ((argv[(*i)][j] == 'r' && !(md5->flags_rqps & FLAG_R))
 			|| (argv[(*i)][j] == 'q' && !(md5->flags_rqps & FLAG_Q)))
-			flag_q_r(md5, argv[(*i)][j], argv, *i);
+			flag_q_r(md5, &argv[(*i)][j], argv, *i);
 		else if (argv[(*i)][j] == 'p')
 			flag_p(md5, argv, *i);
 		else if (argv[(*i)][j] == 's')

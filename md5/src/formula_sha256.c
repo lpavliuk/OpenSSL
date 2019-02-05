@@ -6,7 +6,7 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/03 20:16:33 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/05 20:15:08 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/02/05 19:01:30 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static inline void	start_algo(unsigned int *sha256, char command)
 			g_hash_sha256[i] = copy_hash[i] + g_hash_sha256[i];
 	else
 		while (++i < 8)
-			g_hash_sha224[i] = copy_hash[i] + g_hash_sha224[i];	
+			g_hash_sha224[i] = copy_hash[i] + g_hash_sha224[i];
 }
 
 void				formula_sha256(t_md5 *md5)

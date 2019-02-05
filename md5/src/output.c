@@ -6,7 +6,7 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/03 21:18:55 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/01/26 20:13:27 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/02/05 19:39:11 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,19 @@ static inline void	output(t_md5 *md5, char *hash, int len)
 	write(1, "\e[97m", 5);
 	if (md5->flags_rqps & FLAG_Q && md5->flag_now & FLAG_P)
 		ft_printf("%s", md5->str);
-	else if (md5->flags_rqps & FLAG_Q || (!md5->flags_rqps && !md5->flag_file))
-		ft_printf("%s");
 	else if (md5->flag_file && !(md5->flags_rqps & FLAG_R))
 		print_file(md5);
-	else if (md5->flag_now & FLAG_S && !(md5->flags_rqps & FLAG_R))
+	else if (md5->flag_now & FLAG_S && !(md5->flags_rqps & FLAG_R)
+		&& !(md5->flags_rqps & FLAG_Q))
 		print_s(md5);
-	else if (md5->flag_now & FLAG_P || md5->flags_rqps & FLAG_P)
+	else if (md5->flag_now & FLAG_P && md5->flags_rqps & FLAG_P)
 		ft_printf("%s", md5->str);
 	write(1, hash, len);
-	if (md5->flags_rqps & FLAG_R && md5->flag_file)
+	if (md5->flags_rqps & FLAG_R && md5->flag_file
+		&& !(md5->flags_rqps & FLAG_Q))
 		ft_printf(" %s", md5->str);
-	else if (md5->flags_rqps & FLAG_R && md5->flag_now & FLAG_S)
+	else if (md5->flags_rqps & FLAG_R && md5->flag_now & FLAG_S
+		&& !(md5->flags_rqps & FLAG_Q))
 		ft_printf(" \"%s\"", md5->str);
 	write(1, "\e[0m\n", 5);
 }
