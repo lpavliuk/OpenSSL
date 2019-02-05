@@ -6,7 +6,7 @@
 /*   By: opavliuk <opavliuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 09:14:22 by opavliuk          #+#    #+#             */
-/*   Updated: 2019/02/05 19:57:12 by opavliuk         ###   ########.fr       */
+/*   Updated: 2019/02/05 20:13:05 by opavliuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 static inline void	check_file(t_md5 *md5, char *file)
 {
-	char	buf[1];
+	char	buf[0];
 
 	md5->fd = open(file, O_RDONLY);
 	md5->flag_data = 1;
@@ -27,7 +27,7 @@ static inline void	check_file(t_md5 *md5, char *file)
 		ft_printf("{red}Error:{yellow} %s: %s{eoc}\n", file, ERR0);
 	else
 	{
-		if (read(md5->fd, &buf[0], 1) < 0)
+		if (read(md5->fd, &buf[0], 0) < 0)
 			ft_printf("{red}Error:{yellow} %s: %s{eoc}\n", file, ERR1);
 		else
 		{
