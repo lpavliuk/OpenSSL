@@ -26,4 +26,12 @@ void	update_hashes(void)
 	g_hash_sha256[5] = 0x9B05688C;
 	g_hash_sha256[6] = 0x1F83D9AB;
 	g_hash_sha256[7] = 0x5BE0CD19;
+	g_hash_sha224[0] = 0xc1059ed8;
+	g_hash_sha224[1] = 0x367cd507;
+	g_hash_sha224[2] = 0x3070dd17;
+	g_hash_sha224[3] = 0xf70e5939;
+	g_hash_sha224[4] = 0xffc00b31;
+	g_hash_sha224[5] = 0x68581511;
+	g_hash_sha224[6] = 0x64f98fa7;
+	g_hash_sha224[7] = 0xbefa4fa4;
 }

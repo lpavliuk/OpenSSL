@@ -16,7 +16,7 @@
 # include "../libft/include_lib/libft.h"
 # include <fcntl.h>
 
-# define NUM_CMDS 2
+# define NUM_CMDS 3
 
 # define FLAG_P 0x01
 # define FLAG_S 0x02
@@ -30,7 +30,7 @@
 # define TMD5 g_table_md5
 
 static char					*g_cmd[NUM_CMDS] = {
-	"md5", "sha256"
+	"md5", "sha256", "sha224"
 };
 
 unsigned int				g_hash_md5[4];
@@ -54,6 +54,7 @@ static const unsigned int	g_table_md5[64] = {
 	0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391
 };
 
+unsigned int				g_hash_sha224[8];
 unsigned int				g_hash_sha256[8];
 
 static const unsigned int	g_table_sha256[64] = {
@@ -83,6 +84,7 @@ typedef struct				s_md5
 	int					fd;
 	char				*str;
 	char				flags_rqps;
+	char				flag_now;
 	char				flag_data;
 	char				flag_file;
 	char				flag_usage;
@@ -92,7 +94,7 @@ typedef struct				s_md5
 
 void						argvs(t_md5 *md5, char **argv);
 void						loop_ssl(t_md5 *md5);
-void						usage(char *str);
+void						error_option(t_md5 *md5, char *argv);
 void						output_hash_md5(t_md5 *md5);
 void						output_hash_sha256(t_md5 *md5);
 void						take_fd_md5(t_md5 *md5);
@@ -110,7 +112,8 @@ void						update_hashes(void);
 void						read_stdin(t_md5 *md5);
 
 static void				(*g_func[NUM_CMDS * 2])(t_md5 *md5) = {
-	take_fd_md5, take_str_md5, take_fd_sha256, take_str_sha256
+	take_fd_md5, take_str_md5, take_fd_sha256, take_str_sha256,
+	take_fd_sha256, take_str_sha256
 };
 
 #endif
