@@ -37,7 +37,8 @@ static inline void	output(t_md5 *md5, char *hash, int len)
 	write(1, "\e[97m", 5);
 	if (md5->flags_rqps & FLAG_Q && md5->flag_now & FLAG_P)
 		ft_printf("%s", md5->str);
-	else if (md5->flag_file && !(md5->flags_rqps & FLAG_R))
+	else if (md5->flag_file && !(md5->flags_rqps & FLAG_R)
+		&& !(md5->flags_rqps & FLAG_Q))
 		print_file(md5);
 	else if (md5->flag_now & FLAG_S && !(md5->flags_rqps & FLAG_R)
 		&& !(md5->flags_rqps & FLAG_Q))
