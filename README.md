@@ -6,7 +6,7 @@ __Transport Layer Security (TLS)__ network protocols to protect against eavesdro
 and verify identities during network communication.
 
 
-Create a program named __ft_ssl__ that will recreate part of the OpenSSL
+A program named __ft_ssl__ that recreate part of the OpenSSL
 functionality.
 
 
