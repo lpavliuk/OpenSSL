@@ -24,5 +24,3 @@ integrity against unintentional corruption.
 __SHA-256__ is one of the functions in the __SHA (Secure Hash Algorithms)__ family. The SHA
 algorithms were designed by the NSA. SHA-512 is currently used in part of the process
 to authenticate Debian software packages.
-
-![ScreenShot](https://github.com/lpavliuk/ssl/blob/master/screenshots/Screen%20Shot%202019-02-07%20at%2012.17.55%20PM.png)
